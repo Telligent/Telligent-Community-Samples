@@ -1,0 +1,372 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="Facebook Activity Feed" version="6.0.1205.18476" description="The Facebook Activity Feed plugin displays the most interesting recent activity taking place on your site." instanceIdentifier="29a97aab7f484bb2acad3018e1899027" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set($domain = $core_v2_widget.GetStringValue('domain', ''))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($height = $core_v2_widget.GetUnitValue('height', ''))
+#set($header = $core_v2_widget.GetStringValue('header', ''))
+#set($colorScheme = $core_v2_widget.GetStringValue('colorScheme',''))
+#set($font = $core_v2_widget.GetStringValue('font',''))
+#set($bordercolor = $core_v2_widget.GetColorValue('bordercolor',''))
+#set($recommendations = $core_v2_widget.GetStringValue('recommendations', ''))
+#set($filter = $core_v2_widget.GetStringValue('filter',''))
+#set($ref = $core_v2_widget.GetStringValue('ref',''))
+#set($appId = $core_v2_widget.GetStringValue('appId', ''))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:activity 
+    site="$domain" 
+    width="$width" 
+    height="$height" 
+    header="$header" 
+    colorscheme="$colorScheme"
+    font="$font" 
+    border_color="$bordercolor" 
+    recommendations="$recommendations"
+    filter="$filter"
+    ref="$ref"&gt;
+&lt;/fb:activity&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Activity_Feed}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="domain" resourceName="Domain" dataType="string" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="230 px" /&gt;
+    &lt;property id="height" resourceName="Height" dataType="unit" /&gt;
+    &lt;property id="header" resourceName="Header" dataType="bool" defaultValue="true" /&gt;
+    &lt;property id="borderColor" resourceName="BorderColor" dataType="color" defaultValue="white"/&gt;
+    &lt;property id="colorScheme" resourceName="ColorScheme" dataType="string" defaultValue="light"&gt;
+        &lt;propertyValue value="light" text="Light" /&gt;
+        &lt;propertyValue value="dark" text="Dark" /&gt;
+    &lt;/property&gt;
+    &lt;property id="font" resourceName="Font" dataType="string" defaultValue=""&gt;
+        &lt;propertyValue value="arial" text="Arial" /&gt;
+        &lt;propertyValue value="lucida grande" text="Lucida Grande" /&gt;
+        &lt;propertyValue value="segoe ui" text="Segoe UI" /&gt;
+        &lt;propertyValue value="tahoma" text="Tahoma" /&gt;
+        &lt;propertyValue value="trebuchet ms" text="Trebuchet MS" /&gt;
+        &lt;propertyValue value="verdana" text="Verdana" /&gt;
+    &lt;/property&gt;
+    &lt;property id="filter" resourceName="Filter" dataType="string" /&gt;
+    &lt;property id="recommendations" resourceName="Recommendations" dataType="bool" defaultValue="false" /&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+    &lt;property id="ref" resourceName="Ref" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="Domain">Site to show activity for</resource><resource name="Width">Width</resource><resource name="Height">Height</resource><resource name="Header">Show Header</resource><resource name="BorderColor">Border Color</resource><resource name="ColorScheme">Color Scheme</resource><resource name="Font">Font</resource><resource name="Filter">Filter</resource><resource name="Ref">Referral Label (optional)</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="FbSettings">Facebook Settings</resource><resource name="Recommendations">Recommendations</resource><resource name="Facebook_Activity_Feed">Facebook Activity Feed</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Recommendations" version="6.0.1205.18476" description="The Recommendations plugin shows personalized recommendations to your users." instanceIdentifier="13406c0abcd146cebaa79786c53f331a" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set ($domain = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('domain', '')))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($height = $core_v2_widget.GetUnitValue('height', ''))
+#set($header = $core_v2_widget.GetStringValue('header', ''))
+#set($colorScheme = $core_v2_widget.GetStringValue('colorScheme',''))
+#set($font = $core_v2_widget.GetStringValue('font',''))
+#set($bordercolor = $core_v2_widget.GetColorValue('bordercolor',''))
+#set($ref = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('ref','')))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:recommendations 
+    site="$domain" 
+    width="$width" 
+    height="$height" 
+    header="$header" 
+    colorscheme="$colorScheme"
+    font="$font" 
+    border_color="$bordercolor" 
+    ref="$ref"&gt;
+&lt;/fb:recommendations&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Recommendations}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="domain" resourceName="Domain" dataType="string" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="230 px" /&gt;
+    &lt;property id="height" resourceName="Height" dataType="unit" /&gt;
+    &lt;property id="header" resourceName="Header" dataType="bool" defaultValue="true" /&gt;
+    &lt;property id="borderColor" resourceName="BorderColor" dataType="color" defaultValue="white"/&gt;
+    &lt;property id="colorScheme" resourceName="ColorScheme" dataType="string" defaultValue="light"&gt;
+        &lt;propertyValue value="light" text="Light" /&gt;
+        &lt;propertyValue value="dark" text="Dark" /&gt;
+    &lt;/property&gt;
+    &lt;property id="font" resourceName="Font" dataType="string" defaultValue=""&gt;
+        &lt;propertyValue value="arial" text="Arial" /&gt;
+        &lt;propertyValue value="lucida grande" text="Lucida Grande" /&gt;
+        &lt;propertyValue value="segoe ui" text="Segoe UI" /&gt;
+        &lt;propertyValue value="tahoma" text="Tahoma" /&gt;
+        &lt;propertyValue value="trebuchet ms" text="Trebuchet MS" /&gt;
+        &lt;propertyValue value="verdana" text="Verdana" /&gt;
+    &lt;/property&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+    &lt;property id="ref" resourceName="Ref" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="Domain">Site to show recommendations for</resource><resource name="Width">Width</resource><resource name="Height">Height</resource><resource name="Header">Show Header</resource><resource name="BorderColor">Border Color</resource><resource name="ColorScheme">Color Scheme</resource><resource name="Font">Font</resource><resource name="Ref">Referral Label (optional)</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="FbSettings">Facebook Settings</resource><resource name="Facebook_Recommendations">Facebook Recommendations</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Comments" version="6.0.1205.18476" description="The Facebook comments box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution." instanceIdentifier="7b879bd3e74847debefba39201ad846f" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set ($encodedCurrentUrl = $core_v2_encoding.HtmlAttributeEncode($core_v2_encoding.UrlEncode($core_v2_page.AbsoluteUrl($core_v2_page.Url))))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($colorScheme = $core_v2_widget.GetStringValue('colorScheme',''))
+#set($numPosts = $core_v2_widget.GetStringValue('numPosts',''))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:comments 
+    href="$encodedCurrentUrl" 
+    num_posts="$numPosts" 
+    width="$width"
+    colorscheme="$colorScheme"&gt;
+&lt;/fb:comments&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Comments}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="635 px" /&gt;
+    &lt;property id="numPosts" resourceName="NumPosts" dataType="int" defaultValue="2" /&gt;
+    &lt;property id="colorScheme" resourceName="ColorScheme" dataType="string" defaultValue="light"&gt;
+        &lt;propertyValue value="light" text="Light" /&gt;
+        &lt;propertyValue value="dark" text="Dark" /&gt;
+    &lt;/property&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="Width">Width</resource><resource name="NumPosts">Number of posts</resource><resource name="ColorScheme">Color Scheme</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="FbSettings">Facebook Settings</resource><resource name="Facebook_Comments">Facebook Comments</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Like" version="6.0.1205.18476" description="The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website." instanceIdentifier="09ceb8cea2944437ba94ba90d079fac5" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>#set($encodedCurrentUrl = $core_v2_encoding.HtmlAttributeEncode($core_v2_encoding.UrlEncode($core_v2_page.AbsoluteUrl($core_v2_page.Url))))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($layout = $core_v2_widget.GetStringValue('layout',''))
+#set($colorScheme = $core_v2_widget.GetStringValue('colorScheme',''))
+#set($send = $core_v2_widget.GetStringValue('send', ''))
+#set($showFaces = $core_v2_widget.GetStringValue('showFaces', ''))
+#set($font = $core_v2_widget.GetStringValue('font', ''))
+#set($action = $core_v2_widget.GetStringValue('action', ''))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:like 
+    href="$encodedCurrentUrl" 
+    send="$send"
+    layout="$layout"
+    width="$width" 
+    action="$action"
+    colorscheme="$colorScheme"
+    show_faces="$showFaces" 
+    font="$font"&gt;
+&lt;/fb:like&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Like}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="230 px" /&gt;
+    &lt;property id="colorScheme" resourceName="ColorScheme" dataType="string" defaultValue="light"&gt;
+        &lt;propertyValue value="light" text="Light" /&gt;
+        &lt;propertyValue value="dark" text="Dark" /&gt;
+    &lt;/property&gt;
+    &lt;property id="font" resourceName="Font" dataType="string" defaultValue=""&gt;
+        &lt;propertyValue value="arial" text="Arial" /&gt;
+        &lt;propertyValue value="lucida grande" text="Lucida Grande" /&gt;
+        &lt;propertyValue value="segoe ui" text="Segoe UI" /&gt;
+        &lt;propertyValue value="tahoma" text="Tahoma" /&gt;
+        &lt;propertyValue value="trebuchet ms" text="Trebuchet MS" /&gt;
+        &lt;propertyValue value="verdana" text="Verdana" /&gt;
+    &lt;/property&gt;
+    &lt;property id="showFaces" resourceName="ShowFaces" dataType="bool" defaultValue="true" /&gt;
+    &lt;property id="layout" resourceName="Layout" dataType="string" defaultValue="standard"&gt;
+        &lt;propertyValue value="standard" text="Standard" /&gt;
+        &lt;propertyValue value="button_count" text="Button Count" /&gt;
+        &lt;propertyValue value="box_count" text="Box Count" /&gt;
+    &lt;/property&gt;
+    &lt;property id="send" resourceName="SendButton" dataType="bool" defaultValue="true"/&gt;
+    &lt;property id="action" resourceName="Action" dataType="string"&gt;
+        &lt;propertyValue value="like" text="Like" /&gt;
+        &lt;propertyValue value="recommend" text="Recommend" /&gt;
+    &lt;/property&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+    &lt;property id="ref" resourceName="Ref" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="ColorScheme">Color Schemes</resource><resource name="Font">Font</resource><resource name="ShowFaces">Display profile photos (Standard Layout only)</resource><resource name="Layout">Layout</resource><resource name="SendButton">Display Send Button</resource><resource name="FbSettings">Facebook Settings</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="Action">Verb to Display</resource><resource name="Ref">Referral Label (optional)</resource><resource name="Width">Width</resource><resource name="Facebook_Like">Facebook Like</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Send Button" version="6.0.1205.18476" description="The Send Button allows your users to easily send your content to their friends." instanceIdentifier="7a5821d0aabc46d9b6e8c1bad70c3501" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set($encodedCurrentUrl = $core_v2_encoding.HtmlAttributeEncode($core_v2_encoding.UrlEncode($core_v2_page.AbsoluteUrl($core_v2_page.Url))))
+#set($colorscheme = $core_v2_widget.GetStringValue('colorScheme', ''))
+#set($font = $core_v2_widget.GetStringValue('font', ''))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+#set($ref = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('ref','')))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:send 
+    href="$encodedCurrentUrl" 
+    colorscheme="$colorscheme"
+    font="$font"
+    ref="$ref"&gt;
+&lt;/fb:send&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Send_Button}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="colorScheme" resourceName="ColorScheme" dataType="string" defaultValue="light"&gt;
+        &lt;propertyValue value="light" text="Light" /&gt;
+        &lt;propertyValue value="dark" text="Dark" /&gt;
+    &lt;/property&gt;
+    &lt;property id="font" resourceName="Font" dataType="string" defaultValue=""&gt;
+        &lt;propertyValue value="arial" text="Arial" /&gt;
+        &lt;propertyValue value="lucida grande" text="Lucida Grande" /&gt;
+        &lt;propertyValue value="segoe ui" text="Segoe UI" /&gt;
+        &lt;propertyValue value="tahoma" text="Tahoma" /&gt;
+        &lt;propertyValue value="trebuchet ms" text="Trebuchet MS" /&gt;
+        &lt;propertyValue value="verdana" text="Verdana" /&gt;
+    &lt;/property&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+    &lt;property id="ref" resourceName="Ref" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="ColorScheme">Color Scheme</resource><resource name="Font">Font</resource><resource name="Ref">Referral Label (optional)</resource><resource name="FbSettings">Facebook Settings</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="Facebook_Send_Button">Facebook Send Button</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Live Stream" version="6.0.1205.18476" description="The Live Stream plugin lets users visiting your site or application share activity and comments in real time." instanceIdentifier="8fb92ee4cbd24b8789dec3bf33dee612" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($height = $core_v2_widget.GetUnitValue('height', ''))
+#set($xid = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('xid', '')))
+#set($viaurl = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('viaurl', '')))
+#set($postToFriends = $core_v2_widget.GetStringValue('postToFriends', ''))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+&lt;fb:live-stream 
+    event_app_id="$appId" 
+    width="$width" 
+    height="$height" 
+    xid="$xid" 
+    via_url="$viaurl" 
+    always_post_to_friends="$postToFriends"&gt;
+&lt;/fb:live-stream&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Live_Stream}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="230" /&gt;
+    &lt;property id="height" resourceName="Height" dataType="unit" defaultValue="" /&gt;
+    &lt;property id="xid" resourceName="Xid" dataType="string" /&gt;
+    &lt;property id="viaurl" resourceName="ViaUrl" dataType="string" /&gt;
+    &lt;property id="postToFriends" resourceName="PostToFriends" dataType="bool" defaultValue="false"/&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="AppId">Facebook Application ID (required)</resource><resource name="Width">Width</resource><resource name="Height">Height</resource><resource name="Xid">Identifier for multiple streams (optional)</resource><resource name="ViaUrl">Redirect when people click on the application name in Facebook (optional)</resource><resource name="PostToFriends">Always Post to Friends</resource><resource name="Facebook_Live_Stream">Facebook Live Stream</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Facepile" version="6.0.1205.18476" description="The Facepile plugin displays the Facebook profile pictures of users who have liked your page or have signed up for your site." instanceIdentifier="8a0a043a7bc248228b68e44794f2c8f3" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set($domain = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('domain', '')))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($numrows = $core_v2_widget.GetIntValue('numrows', ''))
+#set($size = $core_v2_widget.GetStringValue('size', ''))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:facepile href="$domain" 
+    width="$width" 
+    max_rows="$numrows"
+    size="$size"&gt;
+&lt;/fb:facepile&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Facepile}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="domain" resourceName="Domain" dataType="string" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="230" /&gt;
+    &lt;property id="numrows" resourceName="NumRows" dataType="int" defaultValue="1"/&gt;
+    &lt;property id="size" resourceName="Size" dataType="string" defaultValue="small"&gt;
+        &lt;propertyValue value="small" text="Small" /&gt;
+        &lt;propertyValue value="large" text="Large" /&gt;
+    &lt;/property&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="Domain">URL of the page</resource><resource name="Width">Width</resource><resource name="NumRows">Maximum number of rows</resource><resource name="Size">Size of social content</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="FbSettings">Facebook Settings</resource><resource name="Facebook_Facepile">Facebook Facepile</resource></language></languageResources>
+	</scriptedContentFragment>
+	<scriptedContentFragment name="Facebook Like Box" version="6.0.1205.18476" description="The Like Box is a social plugin that enables Facebook Page owners to attract and gain Likes from their own website." instanceIdentifier="ccde43f4415a4cc08dccea34cd4a8b5b" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>## Version 1.0
+## Author: @robhoward
+#set($href = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('href', '')))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($height = $core_v2_widget.GetUnitValue('height', ''))
+#set($colorscheme = $core_v2_widget.GetStringValue('colorScheme', ''))
+#set($header = $core_v2_widget.GetStringValue('header', ''))
+#set($stream = $core_v2_widget.GetStringValue('stream', ''))
+#set($faces = $core_v2_widget.GetStringValue('faces', ''))
+#set($forcewall = $core_v2_widget.GetStringValue('forcewall', ''))
+#set($appId = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('appId', '')))
+#set($bordercolor = $core_v2_widget.GetColorValue('bordercolor',''))
+
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+#if ($appId == "")
+&lt;script src="https://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;
+#else
+&lt;script src="https://connect.facebook.net/en_US/all.js#appId=$appId&amp;amp;xfbml=1"&gt;&lt;/script&gt;
+#end
+&lt;fb:like-box 
+    href="$href" 
+    width="$width" 
+    height="$height" 
+    colorscheme="$colorscheme" 
+    show_faces="$faces" 
+    stream="$stream" 
+    header="$header"
+    border_color="$bordercolor"
+    force_wall="$forcewall"&gt;
+&lt;/fb:like-box&gt;</contentScript>
+		<headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Facebook_Like_Box}'))</headerScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="href" resourceName="Href" dataType="string" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="230 px" /&gt;
+    &lt;property id="height" resourceName="Height" dataType="unit" /&gt;
+    &lt;property id="header" resourceName="Header" dataType="bool" defaultValue="true" /&gt;
+    &lt;property id="borderColor" resourceName="BorderColor" dataType="color" defaultValue="white"/&gt;
+    &lt;property id="colorScheme" resourceName="ColorScheme" dataType="string" defaultValue="light"&gt;
+        &lt;propertyValue value="light" text="Light" /&gt;
+        &lt;propertyValue value="dark" text="Dark" /&gt;
+    &lt;/property&gt;
+    &lt;property id="faces" resourceName="ShowFaces" dataType="bool" defaultValue="true"/&gt;
+    &lt;property id="stream" resourceName="ShowStream" dataType="bool" defaultValue="true"/&gt;
+    &lt;property id="forcewall" resourceName="ForceWall" dataType="bool" defaultValue="false"/&gt;
+&lt;/propertyGroup&gt;
+&lt;propertyGroup id="facebook" resourceName="FbSettings"&gt;
+    &lt;property id="appId" resourceName="AppId" dataType="string" /&gt;
+&lt;/propertyGroup&gt;</configuration>
+		<languageResources><language key="en-us"><resource name="Style">Style Options</resource><resource name="FbSettings">Facebook Settings</resource><resource name="AppId">Facebook Application ID (optional)</resource><resource name="Height">Height</resource><resource name="Width">Width</resource><resource name="Href">URL of the Facebook Page</resource><resource name="Header">Show Header</resource><resource name="BorderColor">Border Color</resource><resource name="ShowFaces">Display Profile Photos</resource><resource name="ShowStream">Display a Stream of the Latest Posts</resource><resource name="ForceWall">Display Posts from Place's wall</resource><resource name="ColorScheme">Color Scheme</resource><resource name="Facebook_Like_Box">Facebook Like Box</resource></language></languageResources>
+	</scriptedContentFragment>
+</scriptedContentFragments>

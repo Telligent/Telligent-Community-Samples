@@ -1,0 +1,90 @@
+<scriptedContentFragments><scriptedContentFragment name="Profile Location Map" version="6.0.1205.18476" description="${resource:Description}" instanceIdentifier="7671bed4d00b4a81ac34ed6ff582333d" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass=""><contentScript>## Version 1.0
+## Author: @robhoward
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($height = $core_v2_widget.GetUnitValue('height', ''))
+#set($zoom = $core_v2_widget.GetStringValue('zoom', ''))
+#set($msg = $core_v2_widget.GetStringValue('profileNotSetMsg', ''))
+#set($allowZoom = $core_v2_widget.GetStringValue('allowZoom', '').ToLower())
+#set($profileAttribute = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('profileAttribute', '')))
+#set($profileAttribute2 = $core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetStringValue('profileAttribute2', '')))
+
+## If Current is accessible we're on the profile page
+#if ($core_v2_user.Current)
+    #set($user = $core_v2_user.Current)
+
+    #foreach($profileField in $user.ProfileFields)
+        #if ($profileField.Label == $profileAttribute)
+            #set($location = $profileField.Value)
+        #end
+
+        #if (($profileAttribute2 != '') &amp;&amp; ($profileField.Label == $profileAttribute2))
+            #set($location2 = $profileField.Value)
+        #end
+    #end
+
+    #if ($location2 != '')
+        #set($location = $location2)
+    #end
+#else
+    $core_v2_widget.Hide()
+#end
+
+#if ($location == '')
+    $msg
+#else
+&lt;style type="text/css"&gt;
+  #map_canvas { height: 100% }
+&lt;/style&gt;
+&lt;div id="map_canvas" style="width:$width; height:$height"&gt;&lt;/div&gt;
+
+#registerEndOfPageHtml('com.google.maps')
+    &lt;script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?sensor=false"&gt;
+    &lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+      var geocoder;
+      var map;
+      var query = "$location";
+        geocoder = new google.maps.Geocoder();
+        var myOptions = {
+          zoom: $zoom,
+          draggable: false,
+          disableDefaultUI: true,
+          zoomControl: $allowZoom,
+          disableDoubleClickZoom: true,
+          scrollwheel: false,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        codeAddress();
+    
+      function codeAddress() {
+        var address = query;
+        geocoder.geocode( { 'address': address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map, 
+                position: results[0].geometry.location
+            });
+          } 
+        });
+      }
+    &lt;/script&gt;
+#end
+#end</contentScript><headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Name}'))</headerScript><configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="fragmentHeader" resourceName="Title" dataType="string" defaultValue="${resource:Name}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" /&gt;
+    &lt;property id="profileAttribute" resourceName="ProfileAttribute" dataType="string" defaultValue="Location" /&gt;
+    &lt;property id="profileAttribute2" resourceName="ProfileAttribute2" dataType="string" defaultValue="" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="225 px" /&gt;
+    &lt;property id="height" resourceName="Height" dataType="unit"  defaultValue="300 px" /&gt;
+    &lt;property id="allowZoom" resourceName="AllowZoom" dataType="bool"  defaultValue="true" /&gt;
+    &lt;property id="zoom" resourceName="Zoom" dataType="Int" defaultValue="8"&gt;
+        &lt;propertyValue value="10" text="10" /&gt;
+        &lt;propertyValue value="8" text="8" /&gt;
+        &lt;propertyValue value="6" text="6" /&gt;
+        &lt;propertyValue value="4" text="4" /&gt;
+        &lt;propertyValue value="4" text="2" /&gt;
+    &lt;/property&gt;    
+    &lt;property id="profileNotSetMsg" resourceName="ProfileNotSet" dataType="String" defaultValue="${resource:ProfileNotSetMsg}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" /&gt;
+&lt;/propertyGroup&gt;</configuration><languageResources><language key="en-us"><resource name="Name">Location</resource><resource name="ProfileNotSetMsg">Please set your location, e.g. Dallas, TX, to enable the location map.</resource><resource name="ProfileNotSet">Text to display when the location profile field is empty</resource><resource name="Height">Height</resource><resource name="Width">Width</resource><resource name="Zoom">Map zoom (higher number zooms in)</resource><resource name="Title">Widget Title</resource><resource name="Style">Settings</resource><resource name="AllowZoom">Allow zooming in and out of map</resource><resource name="ProfileAttribute">Primary profile value to use for location (case sensitive)</resource><resource name="ProfileAttribute2">Profile value to use for location if the primary value was not found</resource><resource name="Description">Shows a map of the person's location using Google maps.</resource></language></languageResources></scriptedContentFragment></scriptedContentFragments>

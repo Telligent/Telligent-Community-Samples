@@ -1,0 +1,22 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="Follow Us" version="6.0.1205.18476" description="Follow us widget" instanceIdentifier="ca0406094c614c9d85827ea6fa79eee8" theme="" isCacheable="false" varyCacheByUser="false" showHeaderByDefault="true" cssClass="">
+		<contentScript>#set($facebook = $core_v2_widget.GetStringValue('facebook', ''))
+#set($twitter = $core_v2_widget.GetStringValue('twitter', ''))
+#set($youtube = $core_v2_widget.GetStringValue('youtube', ''))
+#set($facebookImg = $core_v2_widget.GetFileUrl('Facebook.png'))
+#set($twitterImg = $core_v2_widget.GetFileUrl('Twitter.png'))
+#set($youtubeImg = $core_v2_widget.GetFileUrl('Youtube.png'))
+
+&lt;h2&gt;Follow Us&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;a href="$facebook"&gt;$core_v2_media.GetResizedImageHtml($facebookImg, 50, -1, "%{border='0', alt=''}")&lt;/a&gt;
+&lt;a href="$twitter"&gt;$core_v2_media.GetResizedImageHtml($twitterImg, 50, -1, "%{border='0', alt=''}")&lt;/a&gt;
+&lt;a href="$youtube"&gt;$core_v2_media.GetResizedImageHtml($youtubeImg, 50, -1, "%{border='0', alt=''}")&lt;/a&gt;</contentScript>
+		<configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="width" text="Icon Width" dataType="integer"/&gt;
+    &lt;property id="facebook" text="Facebook" dataType="string"/&gt;
+    &lt;property id="twitter" text="Twitter" dataType="string"/&gt;    
+    &lt;property id="youtube" text="YouTube" dataType="string"/&gt;    
+&lt;/propertyGroup&gt;</configuration>
+	</scriptedContentFragment>
+</scriptedContentFragments>

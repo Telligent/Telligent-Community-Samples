@@ -1,0 +1,29 @@
+<scriptedContentFragments><scriptedContentFragment name="${resource:Xbox_GamerCard}" version="6.0.1205.18476" description="${resource:Description}" instanceIdentifier="2b460f13487f4c9d88cfe79f138558cb" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="true" cssClass=""><contentScript>## Version 1.0
+## Author: @robhoward
+#set($gamertag = $core_v2_widget.GetStringValue('gamertag', ''))
+#set($width = $core_v2_widget.GetUnitValue('width', ''))
+#set($height = $core_v2_widget.GetUnitValue('height', ''))
+
+## If Current is accessible we're on the profile page
+#if ($core_v2_user.Current)
+    #set($user = $core_v2_user.Current)
+
+    #foreach($profileField in $user.ProfileFields)
+        #if ($profileField.Label == "XboxId")
+            #set($gamertag = $profileField.Value)
+        #end
+    #end
+#end
+
+## if not gamertag at this point, just hide the widget
+#if ($gamertag == "")
+    $core_v2_widget.Hide()
+#end
+
+## Set the gamer tag for the URL
+#set($gamertagCard = "${gamertag}.card")
+&lt;iframe src="http://gamercard.xbox.com/en-US/$gamertagCard" width="$width" height="$height" frameborder="0"  scrolling="no"&gt;&lt;/iframe&gt;</contentScript><headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Xbox_GamerCard}'))</headerScript><configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="gamertag" resourceName="GamerTag" dataType="string" /&gt;
+    &lt;property id="width" resourceName="Width" dataType="unit" defaultValue="200 px" /&gt;
+    &lt;property id="height" resourceName="Height" dataType="unit" defaultValue="135 px" /&gt;
+&lt;/propertyGroup&gt;</configuration><languageResources><language key="en-us"><resource name="Style">Style options</resource><resource name="Height">Height</resource><resource name="Width">Width</resource><resource name="GamerTag">XBox Gamer Tag</resource><resource name="Xbox_GamerCard">XBox Gamer Card</resource><resource name="Description">Display an Xbox gamer tag. When added to profile, looks for XboxId profile field.</resource></language></languageResources></scriptedContentFragment></scriptedContentFragments>

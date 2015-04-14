@@ -1,0 +1,27 @@
+<scriptedContentFragments><scriptedContentFragment name="${resource:Google_PlusOne}" version="6.0.0.1" description="${resource:Description}" instanceIdentifier="5dbdfa33996c42179e9cc9d7d9d95776" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="false" cssClass="google-plus-one"><contentScript>## Version 1.0
+## Author: @robhoward
+#set($lang = $core_v2_widget.GetStringValue('lang', ''))
+#set($size = $core_v2_widget.GetStringValue('size', ''))
+
+#registerEndOfPageHtml('com.google.plusone')
+    &lt;script type="text/javascript" src="https://apis.google.com/js/plusone.js"&gt;
+    #if($lang != '')
+        {lang:'$lang'}
+    #end
+    &lt;/script&gt;
+#end
+
+&lt;g:plusone size="$core_v2_encoding.HtmlAttributeEncode($size)"&gt;&lt;/g:plusone&gt;</contentScript><headerScript>$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Google_PlusOne}'))</headerScript><configuration>&lt;propertyGroup id="options" resourceName="Style"&gt;
+    &lt;property id="fragmentHeader" resourceName="Title" dataType="string" defaultValue="${resource:Google_PlusOne}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" /&gt;
+    &lt;property id="size" resourceName="Size" dataType="string" defaultValue=""&gt;
+       &lt;propertyValue value="" resourceName="Size_Standard" /&gt;
+       &lt;propertyValue value="small" resourceName="Size_Small" /&gt;
+       &lt;propertyValue value="medium" resourceName="Size_Medium" /&gt;
+       &lt;propertyValue value="tall" resourceName="Size_Tall" /&gt;
+    &lt;/property&gt;
+    &lt;property id="lang" resourceName="Lang" dataType="string" defaultValue=""&gt;
+        &lt;propertyValue value="" resourceName="Language_English" /&gt;
+        &lt;propertyValue value="de" resourceName="Language_German" /&gt;
+        &lt;propertyValue value="es" resourceName="Language_Spanish" /&gt;
+    &lt;/property&gt;
+&lt;/propertyGroup&gt;</configuration><languageResources><language key="en-us"><resource name="Size">Size</resource><resource name="Lang">Language</resource><resource name="Style">Style Options</resource><resource name="Description">+1 buttons let people who love your content recommend it on Google search.</resource><resource name="Google_PlusOne">Google +1</resource><resource name="Size_Standard">Standard (24px)</resource><resource name="Size_Small">Small (15px)</resource><resource name="Size_Medium">Medium (20px)</resource><resource name="Size_Tall">Tall (60px)</resource><resource name="Language_English">US English</resource><resource name="Language_German">German</resource><resource name="Language_Spanish">Spanish</resource></language></languageResources></scriptedContentFragment></scriptedContentFragments>
