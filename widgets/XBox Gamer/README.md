@@ -1,7 +1,7 @@
-# Facebook Social Plugins
+# Xbox Gamer Card
 
-###What are the Facebook Social Plug-ins?
-These widgets are for Community Server platform and allow you to use Facebook's Social Plugins within your community.
+###What is the Xbox Gamer Card
+These widgets are for the Community Server platform and allow you to easily add an Xbox Gamer Card in your profile.
 
 ###Installation:
 
