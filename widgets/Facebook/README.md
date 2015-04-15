@@ -15,5 +15,32 @@ These widgets are for the Community Server platform and allow you to use Faceboo
 
 5.  The widgets are installed and available.
 
-####Questions, Feedback, etc.
+###Usage
+This widget set includes 7 widgets that allow you to add Facebook integration to your community:
+
+####Facebook Activity Feed
+The Facebook Activity Feed plugin displays the most interesting recent activity taking place on your site.
+
+####Facebook Recommendations
+The Recommendations plugin shows personalized recommendations to your users.
+
+####Facebook Comments
+The Facebook comments box is a social plugin that enables user commenting on your site. Features include moderation tools and distribution.
+
+####Facebook Like
+The Like button lets a user share your content with friends on Facebook. When the user clicks the Like button on your site, a story appears in the user's friends' News Feed with a link back to your website.
+
+####Facebook Send Button
+The Send Button allows your users to easily send your content to their friends.
+
+####Facebook Live Stream
+The Live Stream plugin lets users visiting your site or application share activity and comments in real time.
+
+####Facebook Facepile
+The Facepile plugin displays the Facebook profile pictures of users who have liked your page or have signed up for your site.
+
+####Facebook Like Box
+The Like Box is a social plugin that enables Facebook Page owners to attract and gain Likes from their own website.
+
+###Questions, Feedback, etc.
 Please visit our [developer community](http://community.zimbra.com/developers/f) to ask questions, get answers, collaborate and connect with other developers. Plus, give us feedback there so we can continue to improve these tools for you.

@@ -15,5 +15,10 @@ These widgets are for the Community Server platform and allow you to use Google 
 
 5.  The widgets are installed and available.
 
-####Questions, Feedback, etc.
+###Usage
+This widget looks for a user profile field ‘location’. If the ‘location’ profile field is found and contains a value the widget will display a Google maps widget and render a pin on the location value. 
+
+For example, if the user’s location is set to ‘San Francisco’ a map will appear in the user’s profile with a pin on San Francisco.
+
+###Questions, Feedback, etc.
 Please visit our [developer community](http://community.zimbra.com/developers/f) to ask questions, get answers, collaborate and connect with other developers. Plus, give us feedback there so we can continue to improve these tools for you.

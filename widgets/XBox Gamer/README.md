@@ -15,5 +15,8 @@ These widgets are for the Community Server platform and allow you to easily add 
 
 5.  The widgets are installed and available.
 
-####Questions, Feedback, etc.
+###Usage:
+This widget looks for a user profile field XboxId. If a the XboxId profile field is found and contains a value then the widget will call a URL on the Xbox website to render back an Xbox gamer card which is then displayed in the user’s profile.
+
+###Questions, Feedback, etc.
 Please visit our [developer community](http://community.zimbra.com/developers/f) to ask questions, get answers, collaborate and connect with other developers. Plus, give us feedback there so we can continue to improve these tools for you.

@@ -1,7 +1,7 @@
 # Google Plus One Widget
 
 ###What is the Google Plus One Widget?
-These widgets are for the Community Server platform and allow you to use Google Plusone to let people who love your content recommend it on Google search.
+These widgets are for the Community Server platform and allow you to use Google Plus One to let people who love your content recommend it on Google search.
 ###Installation:
 
 1.  Go to your Telligent Community website and sign in as a user that has permissions to access the Control Panel.
@@ -14,5 +14,8 @@ These widgets are for the Community Server platform and allow you to use Google 
 
 5.  The widgets are installed and available.
 
-####Questions, Feedback, etc.
+###Usage
+This widget is used to allow visitors to your community click a ‘Google Plus One’ button to promote content on Google+.
+
+###Questions, Feedback, etc.
 Please visit our [developer community](http://community.zimbra.com/developers/f) to ask questions, get answers, collaborate and connect with other developers. Plus, give us feedback there so we can continue to improve these tools for you.
