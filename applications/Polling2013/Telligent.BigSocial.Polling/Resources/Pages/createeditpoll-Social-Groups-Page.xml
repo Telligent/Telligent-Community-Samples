@@ -1,0 +1,15 @@
+<theme name="3fc3f82483d14ec485ef92e206116d49" version="8.0.0.1">
+  <contentFragmentPages>
+    <contentFragmentPage pageName="createeditpoll" isCustom="false" layout="Content" themeType="c6108064-af65-11dd-b074-de1a56d89593" title="Create/Edit Poll">
+      <regions>
+      <region regionName="Content">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::286651f7a0bb4dc59c2c03420ff38def" showHeader="False" cssClassAddition="no-wrapper responsive-1" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::86f521cd27fb43919261b3383c2ccb15" showHeader="False" cssClassAddition="no-wrapper with-spacing responsive-1" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_createeditpoll%7D" />
+          </contentFragments>
+        </region>
+      </regions>
+      <contentFragmentTabs />
+    </contentFragmentPage>
+  </contentFragmentPages>
+</theme>

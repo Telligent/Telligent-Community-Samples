@@ -1,0 +1,187 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_createeditpoll}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="86f521cd27fb43919261b3383c2ccb15" theme="" isCacheable="false" varyCacheByUser="false" showHeaderByDefault="true" cssClass="create-edit-poll">
+		<contentScript>
+			<![CDATA[
+#set($group = false)
+#set($group = $core_v2_group.Current)
+
+#set($poll = false)
+#set($poll = $telligent_v1_poll.Current)
+
+#if(!$group)
+	$core_v2_widget.Hide()
+#end
+
+#set($canCreate = $telligent_v1_poll.CanCreate($group.Id))
+#set($canEdit = $telligent_v1_poll.CanEdit($poll.Id))
+
+#if($poll && !$canEdit)
+	$core_v2_widget.Hide()
+#elseif(!$poll && !$canCreate)
+	$core_v2_widget.Hide()
+#end
+
+<div id="$core_v2_widget.UniqueId('form')">
+  <div class="field-list-header"></div>
+  <fieldset class="field-list">
+    #if($poll)
+      <h1>$core_v2_language.FormatString($core_v2_language.GetResource("editpoll"), $poll.Name)</h1>
+    #else
+      <h1>$core_v2_language.GetResource("createpoll")</h1>
+    #end
+
+    <ul class="field-list">
+      <li class="field-item required name">
+			  <label for="$core_v2_widget.UniqueId('name')" class="field-item-header">$core_v2_language.GetResource('poll_name')</label>
+			  <span class="field-item-input"><textarea rows="1" class="scaled" maxlength="256" id="$core_v2_widget.UniqueId('name')" style="width: 520px;">#if($poll)$!poll.Name#end</textarea></span>
+			  <span class="field-item-validation" style="display:none;"></span>
+      </li>
+
+		  <li class="field-item description">
+			  <label for="$core_v2_widget.UniqueId('description')" class="field-item-header">$core_v2_language.GetResource('poll_description')</label>
+			  <span class="field-item-input">$core_v2_editor.Render('description', "%{Width='520px', Height='175px', Value=$!poll.Description('raw'), ContentTypeId=$telligent_v1_poll.ContentTypeId}")</span>
+		  </li>
+
+		  <li class="field-item poll-toggled-option">
+			  <label class="field-item-header">$core_v2_language.GetResource('poll_answers')</label>
+			  <div id="$core_v2_widget.UniqueId('answers')">
+				  #if($poll)
+					  #foreach($pollAnswer in $poll.Answers)
+						  <span class="field-item-input" data-pollanswerid="$core_v2_encoding.HtmlAttributeEncode($pollAnswer.Id.ToString())">
+						  <input type="text" size="70" value="$pollAnswer.Name" />
+						  <a href="#" class="delete-answer button" title="$core_v2_language.GetResource('poll_answer_delete')"><span></span>$core_v2_language.GetResource('poll_answer_delete')</a>
+						  </span>
+					  #nodata
+						  $core_v2_language.GetResource('poll_noanswers')
+					  #end
+				  #else
+					  $core_v2_language.GetResource('poll_noanswers')
+				  #end
+			  </div>
+		  </li>
+
+		  <li class="field-item">
+			  <label class="field-item-header" for="$core_v2_widget.UniqueId('newanswer')">$core_v2_language.GetResource('poll_addanswer')</label>
+			  <span class="field-item-input">
+			  <input type="text" id="$core_v2_widget.UniqueId('newanswer')" size="70" />
+				  <input type="button" id="$core_v2_widget.UniqueId('addbutton')" value="$core_v2_language.GetResource('poll_addanswer_button')"></button>
+			  </span>
+		  </li>
+        
+      <li class="field-item">
+          <label class="field-item-header">$core_v2_language.GetResource('poll_votingenddate')</label>
+          <span class="field-item-input">
+              <input type="text" id="$core_v2_widget.UniqueId('votingenddate')" size="70" value="#if($poll && $poll.VotingEndDate)$core_v2_language.FormatDate($poll.VotingEndDate, 'yyyy-MM-dd hh:mm tt')#end" /><br />
+              <input type="checkbox" id="$core_v2_widget.UniqueId('hideresults')" #if($poll && $poll.HideResultsUntilVotingComplete) checked#end /> <label for="$core_v2_widget.UniqueId('hideresults')">$core_v2_language.GetResource('poll_hideresultsuntilvotingcomplete')</label>
+          </span>
+      </li>
+      
+    <li class="field-item post-tags">
+      #set($tags = '')  
+      #foreach($tag in $core_v2_tags.Get($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{}"))
+      #each
+          #set($tags = "$tags$core_v2_encoding.JavascriptEncode($core_v2_encoding.HtmlDecode($tag.TagName))")
+      #between
+          #set($tags = "$tags,")
+      #end  
+        <label for="$core_v2_widget.UniqueId('Tags')" class="field-item-header">$core_v2_language.GetResource('CreateEditPost_Tags')</label>
+        <span class="field-item-input">
+            <input id="$core_v2_widget.UniqueId('TagBox')" type="text" value="$tags" size="70" />
+            <input type="button" id="$core_v2_widget.UniqueId('selectTags')" value="$core_v2_encoding.HtmlAttributeEncode($core_v2_language.GetResource('TagEditor_SelectTags'))" />
+        </span>
+    </li>        
+
+
+		  <li class="field-item save-poll">
+			  <span class="field-item-input">
+				  <a href="javascript:void(0);" class="internal-link save-poll disabled button">
+					  <span></span>$core_v2_language.GetResource('poll_save_button')
+				  </a>
+				  <span class="processing" style="visibility: hidden;"></span>
+			  </span>
+		  </li>
+	  </ul>
+  </fieldset>
+  <div class="field-list-footer"></div>
+</div>
+
+#registerEndOfPageHtml('telligent.bigsocial.widgets.createEditPoll')
+	<script type="text/javascript" src="$core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetFileUrl("ui.js"))"></script>
+#end
+
+#set($tags = '')
+#foreach($tag in $core_v2_tags.List("%{ApplicationIds = $poll.Group.ApplicationId, ContentTypeIds = $telligent_v1_poll.ContentTypeId, PageSize = 100}"))
+#each
+    #set($tags = "$tags'$core_v2_encoding.JavascriptEncode($core_v2_encoding.HtmlDecode($tag.Name))'")
+#between
+    #set($tags = "$tags,")
+#end
+
+#registerEndOfPageHtml()
+	<script type="text/javascript">
+		jQuery(function(j){
+			j.telligent.bigsocial.widgets.createEditPoll.register({
+				groupId: $group.Id,
+				pollId: #if($poll) '$poll.Id'#else null#end,
+                contentTypeId: '$telligent_v1_poll.ContentTypeId',
+				wrapperId: '$core_v2_widget.WrapperElementId',
+				nameId: '$core_v2_widget.UniqueId('name')',
+        votingEndDateId: '$core_v2_widget.UniqueId('votingenddate')',
+        hideResultsId: '$core_v2_widget.UniqueId('hideresults')',
+				nameRequiredText: '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('poll_namerequired'))',
+				getDescription: function() { return $core_v2_editor.GetContentScript('description') },
+                tags: [#if($tags)$tags#end],
+                tagBox: j('#$core_v2_widget.UniqueId('TagBox')'),
+                selectTags: j('#$core_v2_widget.UniqueId('SelectTags')'),
+				answers: j('#$core_v2_widget.UniqueId('answers')'),
+				newAnswer: j('#$core_v2_widget.UniqueId('newanswer')'),
+				addAnswer: j('#$core_v2_widget.UniqueId('addbutton')'),
+				pollAnswerDelete: '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('poll_answer_delete'))',
+				pollAnswerDeleteConfirmation: '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('poll_answer_deleteconfirmation'))',
+				saveErrorText: '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('poll_saveerror'))',
+			});
+		});
+	</script>
+#end
+			]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_createeditpoll}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_createeditpoll}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_createeditpoll">Polling - Create/Edit Poll</resource>
+				<resource name="widget_description">Enables polls to be added or edited.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="poll_name">Name</resource>
+				<resource name="poll_description">Description</resource>
+				<resource name="poll_answers">Answers</resource>
+				<resource name="poll_noanswers">This poll currently has no answers.</resource>
+				<resource name="poll_addanswer">Add an Answer</resource>
+				<resource name="poll_addanswer_button">Add Answer</resource>
+				<resource name="poll_save_button">Save</resource>
+				<resource name="poll_answer_delete">Delete</resource>
+				<resource name="poll_answer_deleteconfirmation">Are you sure you want to delete this answer?</resource>
+				<resource name="poll_saveerror">An error occurred while saving this poll.</resource>
+				<resource name="poll_namerequired">Name is required.</resource>
+				<resource name="ui_createeditpoll">Create/Edit Poll</resource>
+				<resource name="poll_votingenddate">Allow Voting Until</resource>
+				<resource name="poll_hideresultsuntilvotingcomplete">Hide voting results until voting is completed</resource>
+        <resource name="createpoll">Create a Poll</resource>
+        <resource name="editpoll">Editing '{0}'</resource>
+        <resource name="TagEditor_SelectTags">Select Tags...</resource>
+        <resource name="CreateEditPost_Tags">Tags</resource>
+      </language>
+		</languageResources>
+	</scriptedContentFragment>
+</scriptedContentFragments>

@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C0A55C3-4466-4ED6-A1DD-9EC8CCFBEAF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Telligent.BigSocial.Polling</RootNamespace>
+    <AssemblyName>Telligent.BigSocial.Polling</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telligent.Common">
+      <HintPath>..\References\Telligent.Common\Telligent.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.DynamicConfiguration">
+      <HintPath>..\References\Telligent.DynamicConfiguration\Telligent.DynamicConfiguration.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Api">
+      <HintPath>..\References\Telligent.Evolution\Telligent.Evolution.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Components">
+      <HintPath>..\References\Telligent.Evolution\Telligent.Evolution.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Controls">
+      <HintPath>..\References\Telligent.Evolution\Telligent.Evolution.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Core">
+      <HintPath>..\References\Telligent.Evolution\Telligent.Evolution.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Rest">
+      <HintPath>..\References\Telligent.Evolution\Telligent.Evolution.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.ScriptedContentFragments">
+      <HintPath>..\References\Telligent.Evolution\Telligent.Evolution.ScriptedContentFragments.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InternalApi\Entities\Poll.cs" />
+    <Compile Include="InternalApi\Entities\PollAnswer.cs" />
+    <Compile Include="InternalApi\Formatting.cs" />
+    <Compile Include="InternalApi\PollException.cs" />
+    <Compile Include="InternalApi\PollingDataService.cs" />
+    <Compile Include="InternalApi\EmbeddedResources.cs" />
+    <Compile Include="InternalApi\PollingService.cs" />
+    <Compile Include="InternalApi\Entities\PollVote.cs" />
+    <Compile Include="InternalApi\PollingUrlService.cs" />
+    <Compile Include="InternalApi\PollingPermissionService.cs" />
+    <Compile Include="InternalApi\PollsQueryBuilder.cs" />
+    <Compile Include="Plugins\ActivityStream\PollActivityStoryType.cs" />
+    <Compile Include="Plugins\Notifications\AuthorPollVoteNotification.cs" />
+    <Compile Include="Plugins\Scoring\PollVotesMetric.cs" />
+    <Compile Include="Plugins\Scoring\TopPollsScore.cs" />
+    <Compile Include="Plugins\UI\PollGroupNavigation.cs" />
+    <Compile Include="Plugins\UI\PollFactoryDefaultWidgetProvider.cs" />
+    <Compile Include="Plugins\UI\PollHeaderExtension.cs" />
+    <Compile Include="Plugins\UI\PollNewPostLink.cs" />
+    <Compile Include="Plugins\UI\PollUrlsWidgetExtension.cs" />
+    <Compile Include="Plugins\UI\PollUserNavigation.cs" />
+    <Compile Include="Plugins\UI\PollViewer.cs" />
+    <Compile Include="Plugins\UI\PollVoteWidgetExtension.cs" />
+    <Compile Include="Plugins\UI\PollAnswerWidgetExtension.cs" />
+    <Compile Include="Plugins\Content\PollContentType.cs" />
+    <Compile Include="Plugins\PollingApplication.cs" />
+    <Compile Include="Plugins\REST\PollRestEndpoints.cs" />
+    <Compile Include="Plugins\Content\PollSearchCategories.cs" />
+    <Compile Include="Plugins\UI\PollWidgetContextProvider.cs" />
+    <Compile Include="Plugins\UI\PollWidgetExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicApi\PollVoteEvents.cs" />
+    <Compile Include="PublicApi\Entities\PollVote.cs" />
+    <Compile Include="PublicApi\PollVotes.cs" />
+    <Compile Include="PublicApi\PollAnswerEvents.cs" />
+    <Compile Include="PublicApi\PollAnswers.cs" />
+    <Compile Include="PublicApi\Entities\Poll.cs" />
+    <Compile Include="PublicApi\Entities\PollAnswer.cs" />
+    <Compile Include="PublicApi\PollEvents.cs" />
+    <Compile Include="PublicApi\Polls.cs" />
+    <Compile Include="RestApi\Entities\Group.cs" />
+    <Compile Include="RestApi\Entities\Poll.cs" />
+    <Compile Include="RestApi\Entities\PollAnswer.cs" />
+    <Compile Include="RestApi\Entities\PollVote.cs" />
+    <Compile Include="RestApi\Entities\User.cs" />
+    <Compile Include="RestApi\RestResponse.cs" />
+    <Compile Include="WidgetApi\PollUrls.cs" />
+    <Compile Include="WidgetApi\PollAnswers.cs" />
+    <Compile Include="WidgetApi\Polls.cs" />
+    <Compile Include="WidgetApi\PollVotes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sql\uninstall.sql" />
+    <EmbeddedResource Include="Resources\Sql\install.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\createeditpoll-Fiji-Groups-Page.xml" />
+    <EmbeddedResource Include="Resources\Pages\poll-Fiji-Groups-Page.xml" />
+    <EmbeddedResource Include="Resources\Pages\polls-Fiji-Groups-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\createeditpoll-Enterprise-Groups-Page.xml" />
+    <EmbeddedResource Include="Resources\Pages\poll-Enterprise-Groups-Page.xml" />
+    <EmbeddedResource Include="Resources\Pages\polls-Enterprise-Groups-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingBreadcrumbs-Widget.xml" />
+    <EmbeddedResource Include="Resources\Widgets\PollingCreateEditPoll-Widget.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Widgets\PollingCreateEditPoll\ui.js" />
+    <EmbeddedResource Include="Resources\Widgets\PollingLinks-Widget.xml" />
+    <EmbeddedResource Include="Resources\Widgets\PollingPoll-Widget.xml" />
+    <EmbeddedResource Include="Resources\Widgets\PollingPollList-Widget.xml" />
+    <EmbeddedResource Include="Resources\Widgets\PollingTitle-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingPollList\pagedContent.vm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Css\polling-Fiji.css" />
+    <EmbeddedResource Include="Resources\JavaScript\ui-poll.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Css\polling-Enterprise.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Css\poll.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sql\update-1.1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sql\storedprocedures.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sql\update-1.3.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\user-polllist-Enterprise-Page.xml" />
+    <EmbeddedResource Include="Resources\Pages\user-polllist-Fiji-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Css\polling-Social.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\user-polllist-Social-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\polls-Social-Groups-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\poll-Social-Groups-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Pages\createeditpoll-Social-Groups-Page.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Css\polling-handheld-Social.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugins\Jobs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingPoll-Fiji-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingCreateEditPoll-Fiji-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingCreateEditPollFiji\ui.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingCreateEditPoll-Enterprise-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingPoll-Enterprise-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingPollList-Fiji-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingPollList-Enterprise-Widget.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\PollingPollListFiji\pagedContent.vm" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

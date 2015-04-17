@@ -1,0 +1,47 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_polltitle}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="286651f7a0bb4dc59c2c03420ff38def" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="false" cssClass="poll-title">
+		<contentScript>
+			<![CDATA[
+#set($page = $telligent_v1_pollUrls.Current)
+
+#if ($page == 'Poll')
+	#set($title = $!telligent_v1_poll.Current.Name)
+#elseif ($page == 'PollList')
+	#set($title = $core_v2_language.GetResource('polllist'))
+#elseif ($page == 'CreatePoll')
+	#set($title = $core_v2_language.GetResource('createpoll'))
+#elseif ($page == 'EditPoll')
+	#set($title = $core_v2_language.FormatString($core_v2_language.GetResource('editpoll'), $!telligent_v1_poll.Current.Name))
+#end
+
+$core_v2_page.SetTitle($title, true, true)
+		]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_polltitle}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_polltitle}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_polltitle">Polling - Title</resource>
+				<resource name="widget_description">Displays the title for poll pages.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="polllist">Polls</resource>
+				<resource name="createpoll">Create a Poll</resource>
+				<resource name="editpoll">Editing '{0}'</resource>
+			</language>
+		</languageResources>
+		<requiredContext>
+			<context id="c75db121ca2f49458517ef31436d98a0" />
+		</requiredContext>
+	</scriptedContentFragment>
+</scriptedContentFragments>

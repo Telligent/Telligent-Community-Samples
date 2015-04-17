@@ -1,0 +1,28 @@
+<theme name="7e987e474b714b01ba29b4336720c446" version="7.0.0.1">
+  <contentFragmentPages>
+    <contentFragmentPage pageName="createeditpoll" isCustom="false" layout="HeaderTopContentLeftSidebarRight" themeType="c6108064-af65-11dd-b074-de1a56d89593" title="Create/Edit Poll">
+      <regions>
+        <region regionName="Header">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::70e09fc5b5754e56bcf1ed619f8fee69" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::f9c3121b3a3e40ae9e4b7e6926dd4adb" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::286651f7a0bb4dc59c2c03420ff38def" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::ab92f9a89af24721bba1c464c1334be6" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::359bb808134b48b390a51dcceca0490c" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+          </contentFragments>
+        </region>
+        <region regionName="RightSidebar">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::bcb79762012c4e3bb33176eacdac0fe3" showHeader="True" cssClassAddition="full-border with-header" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_actions%7D&amp;links=Link%3Dpolllist" />
+          </contentFragments>
+        </region>
+        <region regionName="Content">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::86f521cd27fb43919261b3383c2ccb15" showHeader="True" cssClassAddition="full-border with-header" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_createeditpoll%7D" />
+          </contentFragments>
+        </region>
+      </regions>
+      <contentFragmentTabs />
+    </contentFragmentPage>
+  </contentFragmentPages>
+</theme>

@@ -1,0 +1,107 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_polllinks}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="bcb79762012c4e3bb33176eacdac0fe3" theme="" isCacheable="true" varyCacheByUser="true" showHeaderByDefault="true" cssClass="poll-links">
+		<contentScript>
+			<![CDATA[
+#set ($links = $core_v2_page.ParseQueryString($core_v2_widget.GetCustomValue('links','Link=editpoll&Link=deletepoll&Link=createpoll&Link=polllist')))
+#set ($hasLinks = false)
+#set ($group = $core_v2_group.Current)
+#set ($poll = false)
+#set ($poll = $telligent_v1_poll.Current)
+
+<div class="navigation-list-header"></div>
+<ul class="navigation-list">
+#foreach($link in $links.Values('Link'))
+	#set ($url = false)
+	#if ($link == 'polllist')
+		#if ($group)
+			#set ($url = $telligent_v1_pollUrls.PollList($group.Id))
+			#if ($url)
+				<li class="navigation-item"><a href="$core_v2_encoding.HtmlAttributeEncode($url)" class="internal-link list-polls"><span></span>$core_v2_language.GetResource('polllist')</a></li>
+				#set ($hasLinks = true)
+			#end
+		#end
+	#elseif ($link == 'createpoll' && $telligent_v1_poll.CanCreate($group.Id))
+		#if ($group)
+			#set ($url = $telligent_v1_pollUrls.CreatePoll($group.Id))
+			#if ($url)
+				<li class="navigation-item"><a href="$core_v2_encoding.HtmlAttributeEncode($url)" class="internal-link create-poll"><span></span>$core_v2_language.GetResource('createpoll')</a></li>
+				#set ($hasLinks = true)
+			#end
+		#end
+	#elseif ($link == 'editpoll' && $telligent_v1_poll.CanEdit($poll.Id))
+		#if ($poll)
+			#set ($url = $telligent_v1_pollUrls.EditPoll($poll.Id))
+			#if ($url)
+				<li class="navigation-item"><a href="$core_v2_encoding.HtmlAttributeEncode($core_v2_page.AdjustTarget($url,'invite'))" class="internal-link edit-poll"><span></span>$core_v2_language.GetResource('editpoll')</a></li>
+				#set ($hasLinks = true)
+			#end
+		#end
+	#elseif ($link == 'deletepoll')
+		#if ($poll && $telligent_v1_poll.CanDelete($poll.Id))
+			<li class="navigation-item"><a href="#" id="$core_v2_widget.UniqueId('deletepoll')" class="internal-link delete-poll"><span></span>$core_v2_language.GetResource('deletepoll')</a></li>
+			#registerEndOfPageHtml()
+				<script type="text/javascript">
+					jQuery(document).ready(function(){
+						jQuery('#$core_v2_widget.UniqueId('deletepoll')').click(function() {
+							if (window.confirm('$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('deletepoll_confirmation'))'))
+							{
+								jQuery.telligent.evolution.del({
+									url: jQuery.telligent.evolution.site.getBaseUrl() + 'api.ashx/v2/polls/poll.json?Id={Id}',
+									data: {
+										Id: '$poll.Id'
+									},
+									success: function(response) {
+										window.location = '$core_v2_encoding.JavascriptEncode($telligent_v1_pollUrls.PollList($poll.Group.Id))';
+									}
+								});
+							}
+							return false;
+						});
+					});
+				</script>
+			#end
+		#end
+	#end
+#end
+</ul>
+<div class="navigation-list-footer"></div>
+
+#if (!$hasLinks)
+	$core_v2_widget.Hide()
+#end
+		]]></contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:Groups_GroupLinks_Name}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="linkArea" resourceName="Options">
+	<property id="fragmentHeader" resourceName="CF_Title" dataType="string" defaultValue="${resource:Groups_GroupLinks_Name}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+	<property id="links" resourceName="configuration_links" dataType="custom" defaultValue="Link=editpoll&amp;Link=deletepoll&amp;Link=createpoll&amp;Link=polllist" controlType="Telligent.Evolution.Controls.SortableListControl, Telligent.Evolution.Controls" height="300" key="Link" >
+		<propertyValue value="polllist" resourceName="polllist" />
+		<propertyValue value="createpoll" resourceName="createpoll" />
+		<propertyValue value="editpoll" resourceName="editpoll" />
+		<propertyValue value="deletepoll" resourceName="deletepoll" />
+	</property>
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_polllinks">Polling - Links</resource>
+				<resource name="widget_description">Common action links related to polling.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="configuration_links">Select, rearrange, and enable the links to be displayed</resource>
+				<resource name="createpoll">Create a new poll</resource>
+				<resource name="editpoll">Edit this poll</resource>
+				<resource name="deletepoll">Delete this poll</resource>
+				<resource name="deletepoll_confirmation">Are you sure you want to delete this poll?</resource>
+				<resource name="polllist">List Polls</resource>
+				<resource name="ui_actions">Actions</resource>
+			</language>
+		</languageResources>
+	</scriptedContentFragment>
+</scriptedContentFragments>

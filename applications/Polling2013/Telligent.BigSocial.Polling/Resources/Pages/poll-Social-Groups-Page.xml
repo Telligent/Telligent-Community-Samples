@@ -1,0 +1,19 @@
+<theme name="3fc3f82483d14ec485ef92e206116d49" version="8.0.0.1">
+  <contentFragmentPages>
+    <contentFragmentPage pageName="poll" isCustom="false" layout="Content" themeType="c6108064-af65-11dd-b074-de1a56d89593" title="Poll">
+      <regions>
+        <region regionName="Content">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::286651f7a0bb4dc59c2c03420ff38def" showHeader="False" cssClassAddition="no-wrapper responsive-1" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::3f6151c2e4674f7bac9e21cabae80131" showHeader="False" cssClassAddition="no-wrapper responsive-1" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3AReportAbuse_Name%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::38980926e6e74c6d849c35a94a7e10c7" showHeader="True" cssClassAddition="no-wrapper responsive-1" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3AAbuseHistory_Name%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::0c6245ca8c7b45d295d7427b7f56cf62" showHeader="False" cssClassAddition="no-wrapper with-spacing responsive-1" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_poll%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::f2a2ded1f5044948a6d1c8ccd0918ebb" showHeader="False" cssClassAddition="no-wrapper with-spacing responsive-3" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3ACommentForm_Name%7D&amp;displayCommentThreshold=0" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::e4e96f3241434dc7bc4a04d39c30192f" showHeader="False" cssClassAddition="no-wrapper with-spacing responsive-3" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3AComments_Name%7D&amp;pageSize=15" />
+          </contentFragments>
+        </region>
+      </regions>
+      <contentFragmentTabs />
+    </contentFragmentPage>
+  </contentFragmentPages>
+</theme>

@@ -1,0 +1,68 @@
+#set($pageIndex = $core_v2_ui.GetCurrentPageIndex)
+#set($pageSize = 6)
+#set($group = $core_v2_group.Current)
+#set($sortBy = $core_v2_widget.GetStringValue('sortBy', 'Date'))
+
+#set($user = $core_v2_user.Current)
+#if($user)
+    #set($polls = $telligent_v1_poll.List($group.Id, "%{AuthorUserId=$user.Id, IncludeSubGroups = 'true', PageIndex=$pageIndex, PageSize=$pageSize}"))
+#else
+    #set($polls = $telligent_v1_poll.List($group.Id, "%{PageIndex=$pageIndex, PageSize=$pageSize, SortBy=$sortBy }"))
+#end
+
+#foreach($poll in $polls)
+#beforeall
+    <ul class="content-list content margin-bottom">
+#each
+    <li class="content-item">
+	
+        <div class="content abbreviated">
+            <div class="author">
+                <div class="avatar">
+                    #if ($poll.Author.ProfileUrl)
+                        <a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)">
+                            $core_v2_ui.GetResizedImageHtml($poll.Author.AvatarUrl, 44, 44, "%{border='0px', alt=$poll.Author.DisplayName, ResizeMethod = 'ZoomAndCrop' }")
+                        </a>
+                    #else
+                        $core_v2_ui.GetResizedImageHtml($poll.Author.AvatarUrl, 44, 44, "%{border='0px', alt=$poll.Author.DisplayName, ResizeMethod = 'ZoomAndCrop' }")
+                    #end
+                </div>
+                <span class="user-name">
+                    #if ($poll.Author.ProfileUrl)
+                        <a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)" class="internal-link view-user-profile">
+                            $poll.Author.DisplayName
+                        </a>
+                    #else
+                        $poll.Author.DisplayName
+                    #end
+                </span>
+            </div>    
+            <div class="attributes">
+                <ul class="attribute-list">
+                    <li class="attribute-item">
+                        <span class="attribute-value">$core_v2_language.FormatDate($poll.CreatedDate)</span>
+                    </li>
+                </ul>
+            </div>            
+            <h3 class="name">
+                <a href="$core_v2_encoding.HtmlAttributeEncode($poll.Url)">$poll.Name</a>
+            </h3>    
+            <div class="content">
+                <div class="post-summary">
+                    $core_v2_language.Truncate($poll.Description('web'), 250, '...')
+                </div>
+                $telligent_v1_poll.UI($poll.Id, "%{ReadOnly='false', ShowNameAndDescription='false'}")
+            </div>
+        </div>
+    </li>
+#afterall
+    </ul>
+#nodata
+	<div class="message norecords">
+        #if($user)
+            $core_v2_language.FormatString($core_v2_language.GetResource('no_userpolls'), $user.DisplayName)
+        #else
+            $core_v2_language.GetResource('no_polls')
+        #end
+    </div>
+#end

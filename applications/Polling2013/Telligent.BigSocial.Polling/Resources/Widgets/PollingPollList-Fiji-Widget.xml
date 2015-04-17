@@ -1,0 +1,34 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_polllist}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="5f93753d405f4eca8faef2f9ed07b946" theme="7e987e474b714b01ba29b4336720c446" isCacheable="true" varyCacheByUser="true" showHeaderByDefault="true" cssClass="poll-list">
+		<contentScript>
+			<![CDATA[
+$core_v2_ui.PagedContent('pagedContent.vm')
+$core_v2_ui.Pager($polls.PageIndex, $polls.PageSize, $polls.TotalCount, "%{ PagedContentFile='pagedContent.vm' }")
+			]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_polllist}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_polllist}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_polllist">Polling - Poll List</resource>
+				<resource name="widget_description">Lists polls within the current group.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="ui_polls">Polls</resource>
+				<resource name="posted_by">Asked by:</resource>
+				<resource name="no_polls">This group does not yet have any polls.</resource>
+        <resource name="no_userpolls">{0} has not submitted any polls.</resource>
+      </language>
+		</languageResources>
+	</scriptedContentFragment>
+</scriptedContentFragments>

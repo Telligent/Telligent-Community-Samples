@@ -1,0 +1,193 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_poll}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="0c6245ca8c7b45d295d7427b7f56cf62" theme="" isCacheable="true" varyCacheByUser="true" showHeaderByDefault="true" cssClass="poll">
+		<contentScript>
+			<![CDATA[
+#set($poll = false)
+#set($poll = $telligent_v1_poll.Current)
+#if(!$poll)
+	#if ($telligent_v1_pollUrls.Current == "Poll" && !$core_v2_widget.IsInWidgetPreviewMode)
+		$core_v2_page.Redirect($core_v2_urls.Message(6))
+	#else
+		$core_v2_widget.Hide()
+	#end
+#end
+
+#set ($accessingUserIsRegistered = $core_v2_user.IsRegistered($core_v2_user.Accessing.Id))
+
+#set ($answerId = '00000000-0000-0000-0000-000000000000')
+#set ($answerId = $core_v2_utility.ParseGuid($core_v2_page.GetQueryStringValue('voted')))
+#if ($answerId != '00000000-0000-0000-0000-000000000000')
+    #set ($answer = $telligent_v1_pollAnswer.Get($answerId))
+    #if ($answer)
+        <div class="message success">$core_v2_language.FormatString($core_v2_language.GetResource("you_voted"), $answer.Name)</div>
+    #else
+        <div class="message success">$core_v2_language.GetResource("vote_saved"))</div>
+    #end
+#else
+    #set ($voteFailed = false)
+    #set ($voteFailed = $core_v2_utility.ParseBool($core_v2_page.GetQueryStringValue('votefailed')))
+    #if ($voteFailed)
+        <div class="message error">$core_v2_language.GetResource("vote_failed")</div>
+    #end
+#end
+
+<div class="content full"> 
+    <h3 class="name">$poll.Name</h3>
+    <div class="content">$!poll.Description('web')</div>
+
+    <div class="attachment">
+    	<div class="attachment-view">
+    		$telligent_v1_poll.UI($poll.Id, "%{ReadOnly = 'false', ShowNameAndDescription = 'false'}")
+    	</div>
+    </div>
+
+
+    #set($Tags = $core_v2_tags.Get($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{}"))
+    #if ($Tags)
+    	#foreach ($tag in $Tags)
+    	#beforeall
+    		<div class="content-tags">
+    			<ul class="tag-list">
+    	#each
+    		#set ($tagUrl = false)
+    		#set ($tagUrl = $core_v2_groupUrls.Tags($poll.Group.Id, $core_v2_utility.MakeList($tag.TagName)))
+    		#if ($tagUrl)
+    			<li class="tag-item">
+    				<a href="$core_v2_encoding.HtmlAttributeEncode($tagUrl)">$tag.TagName</a>
+    			</li>
+    		#end
+    	#afterall
+    			</ul>
+    		</div>
+    	#end
+    #end
+
+    <div class="author">
+    	<span class="user-name">
+    		#if ($poll.Author.ProfileUrl)
+    			<a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)" class="internal-link view-user-profile">
+    				$poll.Author.DisplayName
+    			</a>
+    		#else
+    			$poll.Author.DisplayName
+    		#end
+    	</span>
+    	<div class="avatar">
+    		#if ($poll.Author.ProfileUrl)
+    			<a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)">
+    				$core_v2_ui.GetResizedImageHtml($poll.Author.AvatarUrl, 32, 32, "%{border='0', alt=$poll.Author.DisplayName, ResizeMethod='ZoomAndCrop'}")
+    			</a>
+    		#else
+    			$core_v2_ui.GetResizedImageHtml($poll.Author.AvatarUrl, 32, 32, "%{border='0', alt=$poll.Author.DisplayName, ResizeMethod='ZoomAndCrop'}")
+    		#end
+    	</div>
+    </div>
+
+    #set ($postActionsId = $core_v2_widget.UniqueId("postActions-${post.ContentId}"))
+    #set ($canEdit = $telligent_v1_poll.CanEdit($poll.Id))
+    #set ($canDelete = $telligent_v1_poll.CanDelete($poll.Id))
+    
+    #set($maxLinks = 2) 
+    #if ($canEdit)
+      #set($maxLinks = $maxLinks + 1)
+    #end
+
+    <div class="actions">
+        <div class="ui-links navigation-list" data-minlinks="$maxLinks" data-direction="horizontal" data-maxlinks="$maxLinks" id="$core_v2_encoding.HtmlAttributeEncode($postActionsId)">
+        	<ul class="navigation-list">
+    		    <li class="navigation-list-item date">
+    	            <span class="attribute-value">$core_v2_language.FormatDate($poll.CreatedDate)</span>
+    		    </li>
+                
+    			#if ($accessingUserIsRegistered)
+                	#set ($likeFormat = '{toggle} <span class="count"><span class="icon"></span>{count}</span>')
+                #else
+                	#set ($likeFormat = '<span class="count"><span class="icon"></span>{count}</span>')
+                #end              
+                <li class="navigation-list-item like">
+                    $core_v2_ui.Like($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{ Format = $likeFormat, IncludeTip = 'true' }")
+                </li>
+                                        
+                #if ($canEdit)
+                    <li class="navigation-list-item">
+                        <a href="$core_v2_encoding.HtmlAttributeEncode($telligent_v1_pollUrls.EditPoll($poll.Id))" class="internal-link edit-poll">$core_v2_language.GetResource('editpoll')</a>
+                    </li>
+                #end
+
+    			#if ($canDelete)
+                    <li class="navigation-list-item">
+                        <a href="#" data-messagename="pollDelete" data-mediaid="$poll.Id" data-groupid="$poll.Group.Id" data-successurl="$core_v2_encoding.HtmlAttributeEncode($telligent_v1_pollUrls.PollList($poll.Group.Id))" id="$core_v2_widget.UniqueId('deletepost')" class="internal-link delete-post">$core_v2_language.GetResource('deletepoll')</a>
+                    </li>
+    				<script type="text/javascript">
+                    jQuery(function(j){
+                        j.telligent.evolution.messaging.subscribe('pollDelete', function(data) {
+                    	    if (window.confirm('$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('deletepoll_confirmation'))'))
+                    	    {
+                    		    jQuery.telligent.evolution.del({
+                    			    url: jQuery.telligent.evolution.site.getBaseUrl() + 'api.ashx/v2/polls/poll.json?Id={Id}',
+                    			    data: {
+                    				    Id: '$poll.Id'
+                    			    },
+                    			    success: function(response) {
+                    				    window.location = j(data.target).data('successurl');
+                    			    },
+                    			    defaultErrorMessage: '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource('deleteidea_error'))'
+                    		    });
+                    	    }
+                        });
+                    });
+                    </script>
+                #end
+                
+                #if ($accessingUserIsRegistered)
+                  <li class="navigation-list-item">
+                    $core_v2_ui.Moderate($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{ }")
+                  </li>
+                #end
+
+			    <li class="navigation-list-item">
+		            <a href="#" data-more>$core_v2_language.GetResource('more')</a>
+		        </li>
+		        <li class="navigation-list-item">
+		            <a href="#" data-cancel>$core_v2_language.GetResource('cancel')</a>
+		        </li>
+			</ul>
+		</div>
+	</div>		
+</div>
+  ]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_poll}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_poll}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_poll">Polling - Poll</resource>
+				<resource name="widget_description">Renders a single poll and enabled voting.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="ui_poll">Poll</resource>
+				<resource name="you_voted">Your vote for {0} has been saved.</resource>
+				<resource name="vote_failed">Your vote could not be recorded.  Please vote again below.</resource>
+				<resource name="vote_saved">Your vote was saved.</resource>
+        <resource name="more">More</resource>
+        <resource name="cancel">Cancel</resource>
+        <resource name="editpoll">Edit</resource>
+        <resource name="deletepoll">Delete</resource>
+        <resource name="deletepoll_confirmation">Are you sure you want to delete this poll?</resource>
+      </language>
+		</languageResources>
+		<requiredContext>
+			<context id="d80d27d4e20240009de310ec6e513785" />
+		</requiredContext>
+	</scriptedContentFragment>
+</scriptedContentFragments>

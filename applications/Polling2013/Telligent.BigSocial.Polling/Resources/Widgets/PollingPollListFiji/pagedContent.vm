@@ -1,0 +1,56 @@
+#set($pageIndex = $core_v2_ui.GetCurrentPageIndex)
+#set($pageSize = 6)
+#set($group = $core_v2_group.Current)
+#set($count = 1)
+
+#set($user = $core_v2_user.Current)
+#if($user)
+    #set($polls = $telligent_v1_poll.List($group.Id, "%{AuthorUserId=$user.Id, IncludeSubGroups = 'true', PageIndex=$pageIndex, PageSize=$pageSize}"))
+#else
+    #set($polls = $telligent_v1_poll.List($group.Id, "%{PageIndex=$pageIndex, PageSize=$pageSize}"))
+#end
+
+#foreach($poll in $polls)
+#beforeall
+    <div class="content-list-header"></div>
+    <div class="content-list">
+#each
+    <div class="content-item column-$count">
+	<div class="abbreviated-post-header"></div>
+	<div class="abbreviated-post">
+		<h4 class="post-name"><a href="$core_v2_encoding.HtmlAttributeEncode($poll.Url)" class="internal-link view-poll"><span></span>$poll.Name</a></h4>
+		<div class="post-author">
+			$core_v2_language.GetResource('posted_by')
+			<span class="user-name">
+				#if ($post.Author.ProfileUrl)
+					<a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)">$core_v2_language.Truncate($poll.Author.DisplayName, 15, '...')</a>
+				#else
+					$core_v2_language.Truncate($poll.Author.DisplayName, 15, '...')
+				#end
+			</span>
+		</div>
+		<div class="post-preview">
+			$telligent_v1_poll.UI($poll.Id, "%{ReadOnly='false', ShowNameAndDescription='false'}")
+		</div>
+	</div>
+	<div class="abbreviated-post-footer"></div>
+    </div>
+#between
+	#set ($count = $count + 1)
+	#if ($count == 3)
+		<div style="clear: both;"></div>
+		#set($count = 1)	
+	#end
+#afterall
+	<div style="clear: both;"></div>
+    </div>
+    <div class="content-list-footer"></div>
+#nodata
+	<div class="message norecords">
+        #if($user)
+            $core_v2_language.FormatString($core_v2_language.GetResource('no_userpolls'), $user.DisplayName)
+        #else
+            $core_v2_language.GetResource('no_polls')
+        #end
+    </div>
+#end

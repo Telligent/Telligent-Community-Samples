@@ -1,0 +1,72 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_pollbreadcrumbs}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="f9c3121b3a3e40ae9e4b7e6926dd4adb" theme="" isCacheable="true" varyCacheByUser="false" showHeaderByDefault="false" cssClass="poll-bread-crumbs">
+		<contentScript>
+			<![CDATA[
+#set($page = $telligent_v1_pollUrls.Current)
+#if (!$page)
+	$core_v2_widget.Hide()
+#end
+
+#set($poll = $telligent_v1_poll.Current)
+
+<div class="breadcrumb-list-header"></div>
+<div class="breadcrumb-list">
+	<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($core_v2_urls.Home())" class="internal-link view-home"><span></span>$core_v2_language.GetResource("home")</a></span>
+	#foreach($group in $core_v2_group.CurrentGroupPath)
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($group.Url)" class="internal-link view-group"><span></span>$group.Name</a></span>
+	#end
+
+	#if ($page == "Poll" && $poll)
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($telligent_v1_pollUrls.PollList($core_v2_group.Current.Id))"><span></span>$core_v2_language.GetResource("polllist")</a></span>
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($core_v2_page.Url)"><span></span>$poll.Name</a></span>
+	#elseif ($page == "PollList")
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($core_v2_page.Url)"><span></span>$core_v2_language.GetResource("polllist")</a></span>
+	#elseif ($page == "EditPoll" && $poll)
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($telligent_v1_pollUrls.PollList($core_v2_group.Current.Id))"><span></span>$core_v2_language.GetResource("polllist")</a></span>
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($core_v2_page.Url)"><span></span>$core_v2_language.FormatString($core_v2_language.GetResource("editpoll"), $poll.Name)</a></span>
+	#elseif ($page == "CreatePoll")
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($telligent_v1_pollUrls.PollList($core_v2_group.Current.Id))"><span></span>$core_v2_language.GetResource("polllist")</a></span>
+		<span class="separator">$core_v2_language.GetResource("seperator")</span>
+		<span class="breadcrumb-item"><a href="$core_v2_encoding.HtmlAttributeEncode($core_v2_page.Url)"><span></span>$core_v2_language.GetResource("createpoll")</a></span>
+	#end
+</div>
+<div class="breadcrumb-list-footer"></div>
+			]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_pollbreadcrumbs}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_pollbreadcrumbs}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_pollbreadcrumbs">Polling - Breadcrumbs</resource>
+				<resource name="widget_description">Displays bread crumb links for poll pages.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="home">Home</resource>
+				<resource name="seperator"> &amp;raquo; </resource>
+				<resource name="editpoll">Editing '{0}'</resource>
+				<resource name="createpoll">Create a Poll</resource>
+				<resource name="polllist">Polls</resource>
+			</language>
+		</languageResources>
+		<requiredContext>
+			<context id="c75db121ca2f49458517ef31436d98a0" />
+		</requiredContext>
+	</scriptedContentFragment>
+</scriptedContentFragments>

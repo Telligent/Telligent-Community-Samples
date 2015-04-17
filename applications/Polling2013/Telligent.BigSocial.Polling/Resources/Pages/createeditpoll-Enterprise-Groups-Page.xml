@@ -1,0 +1,23 @@
+<theme name="424eb7d9138d417b994b64bff44bf274" version="7.0.0.1">
+  <contentFragmentPages>
+    <contentFragmentPage pageName="createeditpoll" isCustom="false" layout="SidebarLeftContentRight" themeType="c6108064-af65-11dd-b074-de1a56d89593" title="Create/Edit Poll">
+      <regions>
+        <region regionName="LeftSidebar">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::ab92f9a89af24721bba1c464c1334be6" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::359bb808134b48b390a51dcceca0490c" showHeader="False" cssClassAddition="no-wrapper" isLocked="False"  />
+          </contentFragments>
+        </region>
+        <region regionName="Content">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::70e09fc5b5754e56bcf1ed619f8fee69" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3AGroups_GroupAccessibilityInformation_Name%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::286651f7a0bb4dc59c2c03420ff38def" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Awidget_polltitle%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::f9c3121b3a3e40ae9e4b7e6926dd4adb" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Awidget_pollbreadcrumbs%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::86f521cd27fb43919261b3383c2ccb15" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_createeditpoll%7D" />
+          </contentFragments>
+        </region>
+      </regions>
+      <contentFragmentTabs />
+    </contentFragmentPage>
+  </contentFragmentPages>
+</theme>

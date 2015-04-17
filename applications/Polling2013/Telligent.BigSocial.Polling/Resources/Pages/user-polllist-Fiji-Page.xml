@@ -1,0 +1,22 @@
+<theme name="7e987e474b714b01ba29b4336720c446" version="7.0.0.1">
+  <contentFragmentPages>
+    <contentFragmentPage pageName="user-polllist" isCustom="false" layout="HeaderTopContent" themeType="0c647246-6735-42f9-875d-c8b991fe739b">
+      <regions>
+        <region regionName="Header">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::407bf6e733714e1abdcdff774d10ac98" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3ACore_BreadCrumbs_Name%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::af9000b6cc8c4f658c2046ffdc09c5db" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3ACore_Title_Title_Title%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::f37d7b83ea2942cba359029ec84a7bc5" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3ACore_UserBanner_Name%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::19e9689493a4449eb063e61762da2ea4" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3ACore_UserNavigation_Name%7D&amp;navigation=" />
+          </contentFragments>
+        </region>
+        <region regionName="Content">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::5f93753d405f4eca8faef2f9ed07b946" showHeader="True" cssClassAddition="full-border with-header" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_polls%7D" />
+          </contentFragments>
+        </region>
+      </regions>
+      <contentFragmentTabs />
+    </contentFragmentPage>
+  </contentFragmentPages>
+</theme>

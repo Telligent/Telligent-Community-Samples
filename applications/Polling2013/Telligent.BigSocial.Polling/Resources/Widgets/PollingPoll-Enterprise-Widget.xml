@@ -1,0 +1,115 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_poll}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="0c6245ca8c7b45d295d7427b7f56cf62" theme="424eb7d9138d417b994b64bff44bf274" isCacheable="true" varyCacheByUser="true" showHeaderByDefault="true" cssClass="poll">
+		<contentScript>
+			<![CDATA[
+#set($poll = false)
+#set($poll = $telligent_v1_poll.Current)
+#if(!$poll)
+	#if ($telligent_v1_pollUrls.Current == "Poll" && !$core_v2_widget.IsInWidgetPreviewMode)
+		$core_v2_page.Redirect($core_v2_urls.Message(6))
+	#else
+		$core_v2_widget.Hide()
+	#end
+#end
+
+#set ($accessingUserIsRegistered = $core_v2_user.IsRegistered($core_v2_user.Accessing.Id))
+
+#set ($answerId = '00000000-0000-0000-0000-000000000000')
+#set ($answerId = $core_v2_utility.ParseGuid($core_v2_page.GetQueryStringValue('voted')))
+#if ($answerId != '00000000-0000-0000-0000-000000000000')
+    #set ($answer = $telligent_v1_pollAnswer.Get($answerId))
+    #if ($answer)
+        <div class="message success">$core_v2_language.FormatString($core_v2_language.GetResource("you_voted"), $answer.Name)</div>
+    #else
+        <div class="message success">$core_v2_language.GetResource("vote_saved"))</div>
+    #end
+#else
+    #set ($voteFailed = false)
+    #set ($voteFailed = $core_v2_utility.ParseBool($core_v2_page.GetQueryStringValue('votefailed')))
+    #if ($voteFailed)
+        <div class="message error">$core_v2_language.GetResource("vote_failed")</div>
+    #end
+#end
+
+<div class="full-post-header"></div>
+<div class="full-post">
+	<h3 class="post-name">$poll.Name</h3>
+	<div class="post-author">
+		<span class="avatar">
+			#if ($poll.Author.ProfileUrl)
+				<a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)">
+					$core_v2_ui.GetResizedImageHtml($poll.Author.AvatarUrl, 32, 32, "%{border='0', alt=$media.Author.DisplayName}")
+				</a>
+			#else
+				$core_v2_ui.GetResizedImageHtml($poll.Author.AvatarUrl, 32, 32, "%{border='0', alt=$media.Author.DisplayName}")
+			#end
+		</span>
+		<span class="user-name">
+			#if ($poll.Author.ProfileUrl)
+				<a href="$core_v2_encoding.HtmlAttributeEncode($poll.Author.ProfileUrl)" class="internal-link view-user-profile">
+					<span></span>$poll.Author.DisplayName
+				</a>
+			#else
+				<span></span>$poll.Author.DisplayName
+			#end
+		</span>
+	</div>
+	<div class="post-content user-defined-markup">$!poll.Description('web')</div>
+	<div class="post-attachment-viewer">
+		$telligent_v1_poll.UI($poll.Id, "%{ReadOnly = 'false', ShowNameAndDescription = 'false'}")
+	</div>
+	<div class="post-date">
+		<span class="label">$core_v2_language.GetResource("posted")</span>
+		<span class="value">$core_v2_language.FormatDate($poll.CreatedDate)</span>
+	</div>
+    <div class="post-tags">
+        #set($tagUrlFormat = $core_v2_page.AbsoluteUrl($core_v2_groupUrls.Tags($poll.Group.Id, $core_v2_utility.MakeList('TAGNAME')).Replace('TAGNAME','{tag}')))
+        $core_v2_ui.Tag($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{UrlFormat=$tagUrlFormat}")
+    </div>
+	#if ($accessingUserIsRegistered)
+		#set ($likeFormat = '{toggle} <span class="count"><span class="icon"></span>{count}</span>')
+	#else
+		#set ($likeFormat = '<span class="count"><span class="icon"></span>{count}</span>')
+	#end
+	<div class="post-like">
+	    $core_v2_ui.Like($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{ Format = $likeFormat }")
+	</div>
+	<div class="post-moderate">
+	    #if ($core_v2_user.IsRegistered($core_v2_user.Accessing.Id))
+	        $core_v2_ui.Moderate($poll.ContentId, $telligent_v1_poll.ContentTypeId, "%{ CssClass = 'expanded' }")
+	    #end
+	</div>
+</div>
+<div class="full-post-footer"></div>
+  ]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_poll}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_poll}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+		<languageResources>
+			<language key="en-us">
+				<resource name="widget_poll">Polling - Poll</resource>
+				<resource name="widget_description">Renders a single poll and enabled voting.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="ui_poll">Poll</resource>
+				<resource name="posted">Posted: </resource>
+				<resource name="you_voted">Your vote for {0} has been saved.</resource>
+				<resource name="vote_failed">Your vote could not be recorded.  Please vote again below.</resource>
+				<resource name="vote_saved">Your vote was saved.</resource>
+      </language>
+		</languageResources>
+		<requiredContext>
+			<context id="d80d27d4e20240009de310ec6e513785" />
+		</requiredContext>
+	</scriptedContentFragment>
+</scriptedContentFragments>

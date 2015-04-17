@@ -1,0 +1,31 @@
+<theme name="424eb7d9138d417b994b64bff44bf274" version="7.0.0.1">
+  <contentFragmentPages>
+    <contentFragmentPage pageName="poll" isCustom="false" layout="SidebarLeftContentCenterSidebarRight" themeType="c6108064-af65-11dd-b074-de1a56d89593" title="Poll">
+      <regions>
+        <region regionName="LeftSidebar">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::ab92f9a89af24721bba1c464c1334be6" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::359bb808134b48b390a51dcceca0490c" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+          </contentFragments>
+        </region>
+        <region regionName="RightSidebar">
+          <contentFragments>
+			  <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::a17003526ac1402f8f7e2e9590222edd" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" />
+			  <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::bcb79762012c4e3bb33176eacdac0fe3" showHeader="True" cssClassAddition="no-wrapper-with-spacing with-header" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_actions%7D" />
+          </contentFragments>
+        </region>
+        <region regionName="Content">
+          <contentFragments>
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::70e09fc5b5754e56bcf1ed619f8fee69" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::286651f7a0bb4dc59c2c03420ff38def" showHeader="False" cssClassAddition="no-wrapper" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Awidget_polltitle%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::f9c3121b3a3e40ae9e4b7e6926dd4adb" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Awidget_pollbreadcrumbs%7D" />
+            <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::0c6245ca8c7b45d295d7427b7f56cf62" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" configuration="fragmentHeader=%24%7Bresource%3Aui_poll%7D" />
+   		    <contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::59c79018954f49d581191adf7032d376" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" />
+			<contentFragment type="Telligent.Evolution.ScriptedContentFragments.ScriptedContentFragment, Telligent.Evolution.ScriptedContentFragments::bfdae73a86be4384abb9c25456b15a03" showHeader="False" cssClassAddition="no-wrapper-with-spacing" isLocked="False" />
+		  </contentFragments>
+        </region>
+      </regions>
+      <contentFragmentTabs />
+    </contentFragmentPage>
+  </contentFragmentPages>
+</theme>
