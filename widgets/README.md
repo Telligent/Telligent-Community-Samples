@@ -5,17 +5,17 @@ Widgets are the primary method of extending the user interface of Community Serv
 This is a collection of widgets created by Telligent, Telligent customers, Telligent Partners and members of the Telligent Developer community.  They are here to be used how you choose, either to enhance your community experience or to serve as examples/guides for widgets you wish to create yourself.
 
 
-All widgets here are availabel under the [MIT](http://opensource.org/licenses/MIT) license.
+All widgets here are available under the [MIT](http://opensource.org/licenses/MIT) license.
 
 
-These widgets are provided for example and informational purposes only and are not included in normal product support.  However if you find an issue let us know and we will try to get it fixed or contact the developer to assist.  If you want to tackle it yourself, feel free to change it and submit a pull request.
+These widgets are provided for example and informational purposes only and are not included in normal product support.  However if you find an issue let us know and we will try to get it fixed or contact the developer responsible to assist.  If you want to tackle it yourself, feel free to change it and submit a pull request.
 
 ##Contributing
 1. Fork the repository locally to perform all your work
 2. Once completed, create a [PULL](https://help.github.com/articles/using-pull-requests/) Request with your changes. These will be reviewed and merged by one of the project owners. (NOTE: Project contributors can commit directly without pull requests but please continue to follow the guidelines below)
 
 ###Guidelines
-Everything must be included in its own folder under the widgets directory containing the following:
+Everything must be included in its own folder under the widgets directory (the directory of this README) containing the following:
 
 
 1.  You must include a **README.md** file in the root of the your widget directory explaining the following:
