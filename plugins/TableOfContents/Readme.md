@@ -1,4 +1,4 @@
-#Table of Contents plugin for Zimbra Social
+#Table of Contents plugin for Telligent Community
 
 The Table of Contents plugin  allows you to automatically generate a table of contents
 for a wiki page, blog post, forum post or media file.
