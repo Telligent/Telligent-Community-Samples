@@ -1,6 +1,6 @@
 #Widgets
 
-Widgets are the primary method of extending the user interface of Community Server either by changing how things are presented, adding new elements to pages or exposing new functionality.
+Widgets are the primary method of extending the user interface of Telligent Community either by changing how things are presented, adding new elements to pages or exposing new functionality.
 
 This is a collection of widgets created by Telligent, Telligent customers, Telligent Partners and members of the Telligent Developer community.  They are here to be used how you choose, either to enhance your community experience or to serve as examples/guides for widgets you wish to create yourself.
 
