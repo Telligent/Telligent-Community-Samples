@@ -22,5 +22,5 @@ Copy the compiled plugin to the bin directory of your community website, and the
 ##Building Source Code
 
 1. In the root of the project, Create a `TelligentEvolutionBinaries` directory
-2. Copy the binaries from the /bin/ directory of your Zimbra Social community into the directory you just created
+2. Copy the binaries from the /bin/ directory of your Telligent Community into the directory you just created
 3. Open up Visual Studio and build the solution.
