@@ -1,24 +1,30 @@
 ﻿using System;
 using Telligent;
-using Telligent.Search;
+using Telligent.Community;
 
 namespace Main
 {
 	class MainClass
 	{
+		static string username = "rhoward";
+		static string email = "rob@telligent.com";
+
 		public static void Main (string[] args)
 		{
 			// Search examples
-			SearchExamples();
+			//SearchExamples();
 
 			// Forum examples
-			ForumExamples();
+			//ForumExamples();
+
+			// User examples
+			UserExamples();
 			
 		}
 
 		public static void SearchExamples () {
 			string searchPhrase = "test";
-			string searchUser = "rhoward";
+
 
 			// Get a count of search results for the search phrase
 			Util.WriteLine ("Search count for search term '" + searchPhrase + "': " + Search.ByKeyword (searchPhrase).ToString(), ConsoleColor.Red);
@@ -27,7 +33,7 @@ namespace Main
 			Util.WriteLine ("User count for search term '" + searchPhrase + "': " + Search.ForUsers (searchPhrase).ToString(), ConsoleColor.Red);
 
 			// Does the user exist?
-			Util.WriteLine ("Does user '" + searchUser + "' exist: " + Search.ForUserByName (searchUser).ToString(), ConsoleColor.Red);
+			Util.WriteLine ("Does user '" + username + "' exist: " + Search.ForUserByName (username).ToString(), ConsoleColor.Red);
 		}
 
 		public static void ForumExamples() {
@@ -35,6 +41,12 @@ namespace Main
 
 //			Util.WriteLine("Count
 	
+		}
+
+		public static void UserExamples() {
+			Util.WriteLine ("User Id for '" + username + "' is: " + User.GetUserByName(username).UserId, ConsoleColor.Red);
+
+			Util.WriteLine ("User Id for '" + email + "' is: " + User.GetUserByEmail(email).UserId, ConsoleColor.Red);
 		}
 	}
 

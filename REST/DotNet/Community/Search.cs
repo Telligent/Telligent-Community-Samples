@@ -3,7 +3,7 @@ using System.Xml;
 using System.Net;
 using Telligent;
 
-namespace Telligent.Search
+namespace Telligent.Community
 {
 	/// <summary>
 	/// Internal functions are designed to be standalone.
@@ -22,13 +22,13 @@ namespace Telligent.Search
 
 			// Build URL
 			Config c = Util.GetConfig();
-			string search = c.ApiUrl + string.Format(restEndPoint, term);
+			string url = c.ApiUrl + string.Format(restEndPoint, term);
 			XmlDocument doc = new XmlDocument ();
 
 			// Get the first set of data to determine how many pages exist
 			using (WebClient webClient = Util.GetWebClient ()) {
 
-				doc.LoadXml (webClient.DownloadString (search));
+				doc.LoadXml (webClient.DownloadString (url));
 			}
 
 			// Get the total count of results
@@ -49,13 +49,13 @@ namespace Telligent.Search
 
 			// Build URL
 			Config c = Util.GetConfig();
-			string search = c.ApiUrl + string.Format(restEndPoint, term);
+			string url = c.ApiUrl + string.Format(restEndPoint, term);
 			XmlDocument doc = new XmlDocument ();
 
 			// Get the first set of data to determine how many pages exist
 			using (WebClient webClient = Util.GetWebClient ()) {
 
-				doc.LoadXml (webClient.DownloadString (search));
+				doc.LoadXml (webClient.DownloadString (url));
 			}
 
 			// Get the total count of results
@@ -77,13 +77,13 @@ namespace Telligent.Search
 
 			// Build URL
 			Config c = Util.GetConfig();
-			string search = c.ApiUrl + string.Format(restEndPoint, username);
+			string url = c.ApiUrl + string.Format(restEndPoint, username);
 			XmlDocument doc = new XmlDocument ();
 
 			// Get the first set of data to determine how many pages exist
 			using (WebClient webClient = Util.GetWebClient ()) {
 
-				doc.LoadXml (webClient.DownloadString (search));
+				doc.LoadXml (webClient.DownloadString (url));
 			}
 
 			// Get the total count of results

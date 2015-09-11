@@ -42,7 +42,7 @@
       <Project>{15F86F3E-C93F-477C-9E56-CD6125DE8CF8}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Search\Community.csproj">
+    <ProjectReference Include="..\Community\Community.csproj">
       <Project>{9F7C160F-3D85-456A-B695-9375BFC24654}</Project>
       <Name>Community</Name>
     </ProjectReference>
