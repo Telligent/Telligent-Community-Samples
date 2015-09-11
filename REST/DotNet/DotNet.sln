@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Search", "Search\Search.csproj", "{9F7C160F-3D85-456A-B695-9375BFC24654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community", "Search\Community.csproj", "{9F7C160F-3D85-456A-B695-9375BFC24654}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{15F86F3E-C93F-477C-9E56-CD6125DE8CF8}"
 EndProject

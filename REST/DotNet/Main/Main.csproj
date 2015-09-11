@@ -38,13 +38,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Search\Search.csproj">
-      <Project>{9F7C160F-3D85-456A-B695-9375BFC24654}</Project>
-      <Name>Search</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{15F86F3E-C93F-477C-9E56-CD6125DE8CF8}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Search\Community.csproj">
+      <Project>{9F7C160F-3D85-456A-B695-9375BFC24654}</Project>
+      <Name>Community</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

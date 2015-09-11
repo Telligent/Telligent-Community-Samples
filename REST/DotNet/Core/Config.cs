@@ -14,7 +14,7 @@ namespace Telligent
 		string username;
 		string apikey;
 		string url;
-		int setSize = 100;
+		int pageSize = 25;
 		bool log;
 		bool verbose;
 		string apiKey = null;
@@ -29,7 +29,7 @@ namespace Telligent
 			url = config.SelectSingleNode("config").Attributes["apiUrl"].InnerText;
 			log = bool.Parse(config.SelectSingleNode("config").Attributes["log"].InnerText);
 			verbose = bool.Parse(config.SelectSingleNode("config").Attributes["verbose"].InnerText);
-			setSize = int.Parse(config.SelectSingleNode("config").Attributes["setSize"].InnerText);
+			pageSize = int.Parse(config.SelectSingleNode("config").Attributes["pageSize"].InnerText);
 
 			// Get the username and password
 			username = config.SelectSingleNode ("/config/api/username").InnerText;
@@ -51,8 +51,8 @@ namespace Telligent
 			}
 		}
 
-		public int SetSize {
-			get { return setSize; }
+		public int PageSize {
+			get { return pageSize; }
 		}
 
 		public bool Log {
