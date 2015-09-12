@@ -11,14 +11,26 @@ namespace Telligent.Community
 		public enum UserStatus {Approved, Banned, Disapproved, NotSet};
 		UserStatus status = UserStatus.NotSet;
 
+		/// <summary>
+		/// Gets the user identifier.
+		/// </summary>
+		/// <value>The user identifier.</value>
 		public int UserId {
 			get { return userId; }
 		}
 
+		/// <summary>
+		/// Gets the username.
+		/// </summary>
+		/// <value>The username.</value>
 		public string Username {
 			get { return username; }
 		}
 
+		/// <summary>
+		/// Gets the account status.
+		/// </summary>
+		/// <value>The account status.</value>
 		public UserStatus AccountStatus {
 			get { return status; }
 		}
@@ -49,6 +61,27 @@ namespace Telligent.Community
 			}
 
 			return u;
+		}
+
+		/// <summary>
+		/// Determines if a user is approved in the community
+		/// </summary>
+		/// <returns><c>true</c> if is approved user the specified username; otherwise, <c>false</c>.</returns>
+		/// <param name="username">Username.</param>
+		public static bool IsApprovedUser (string username) {
+			User u;
+
+			try {
+				u = GetUserByName (username);
+			} catch {
+				return false;
+			}
+
+			if (u.AccountStatus == UserStatus.Approved)
+				return true;
+
+			return false;
+
 		}
 
 		/// <summary>
