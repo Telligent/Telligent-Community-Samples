@@ -8,6 +8,7 @@ namespace Telligent.Community
 	{
 		int userId = 0;
 		string username = "";
+		string email = "";
 		public enum UserStatus {Approved, Banned, Disapproved, NotSet};
 		UserStatus status = UserStatus.NotSet;
 
@@ -27,6 +28,10 @@ namespace Telligent.Community
 			get { return username; }
 		}
 
+		public string Email {
+			get { return email; }
+		}
+
 		/// <summary>
 		/// Gets the account status.
 		/// </summary>
@@ -43,20 +48,21 @@ namespace Telligent.Community
 		public static User UserFromXml (XmlDocument user) {
 			User u = new User ();
 
-			u.UserId = int.Parse (user.SelectSingleNode ("/Response/User/Id").InnerText);
-			u.Username = user.SelectSingleNode ("/Response/User/Username").InnerText;
+			u.userId = int.Parse (user.SelectSingleNode ("/Response/User/Id").InnerText);
+			u.username = user.SelectSingleNode ("/Response/User/Username").InnerText;
+			u.email = user.SelectSingleNode ("/Response/User/PrivateEmail").InnerText;
 
 			string accountstatus = user.SelectSingleNode ("/Response/User/AccountStatus").InnerText;
 
 			switch (accountstatus) {
 				case "Approved":
-					u.AccountStatus = UserStatus.Approved;
+					u.status = UserStatus.Approved;
 					break;
 				case "Banned":
-					u.AccountStatus = UserStatus.Banned;
+					u.status = UserStatus.Banned;
 					break;
 				case "Disapproved":
-					u.AccountStatus = UserStatus.Disapproved;
+					u.status = UserStatus.Disapproved;
 					break;
 			}
 
@@ -68,20 +74,15 @@ namespace Telligent.Community
 		/// </summary>
 		/// <returns><c>true</c> if is approved user the specified username; otherwise, <c>false</c>.</returns>
 		/// <param name="username">Username.</param>
-		public static bool IsApprovedUser (string username) {
-			User u;
+		public bool IsApprovedUser {
 
-			try {
-				u = GetUserByName (username);
-			} catch {
+			get {
+
+				if (this.AccountStatus == UserStatus.Approved)
+					return true;
+
 				return false;
 			}
-
-			if (u.AccountStatus == UserStatus.Approved)
-				return true;
-
-			return false;
-
 		}
 
 		/// <summary>
@@ -134,7 +135,7 @@ namespace Telligent.Community
 				doc.LoadXml (webClient.DownloadString (url));
 			}
 
-			// Return the Id of the user
+			// Did we find the user?
 			try {
 				u = UserFromXml(doc);
 			} catch {
@@ -142,6 +143,36 @@ namespace Telligent.Community
 			}
 
 			return u;
+		}
+
+		/// <summary>
+		/// Deletes a user from the community
+		/// </summary>
+		/// <returns><c>true</c>, if user was deleted, <c>false</c> otherwise.</returns>
+		/// <param name="userId">User identifier.</param>
+		public static bool DeleteUser (int userId) {
+			string restEndPoint = "users/{0}.xml";
+
+			// Build URL
+			Config c = Util.GetConfig();
+			string url = c.ApiUrl + string.Format(restEndPoint, userId.ToString());
+			XmlDocument doc = new XmlDocument ();
+
+			// Get the first set of data to determine how many page	s exist
+			using (WebClient webClient = Util.DeleteWebClient ()) {
+				doc.LoadXml (webClient.DownloadString (url));
+			}
+
+			string toCompare = "User was deleted".ToLower();
+
+			try {
+				if (toCompare == doc.SelectSingleNode ("/Response/Info/Message").InnerText.ToLower())
+					return true;
+			} catch {
+				return false;
+			}
+
+			return false;
 		}
 
 	}

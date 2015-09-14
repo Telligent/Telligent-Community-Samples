@@ -44,9 +44,25 @@ namespace Main
 		}
 
 		public static void UserExamples() {
-			Util.WriteLine ("User Id for '" + username + "' is: " + User.GetUserByName(username).UserId, ConsoleColor.Red);
+			User u = null;
 
-			Util.WriteLine ("User Id for '" + email + "' is: " + User.GetUserByEmail(email).UserId, ConsoleColor.Red);
+			try {
+				u = User.GetUserByName(username);
+				Util.WriteLine ("User Id for '" + username + "' is: " + u.UserId, ConsoleColor.Red);
+				Util.WriteLine ("Email address for '" + username + "' is: " + u.Email, ConsoleColor.Red);
+				Util.WriteLine ("User '" + username + "' is an approved community user: " + u.IsApprovedUser, ConsoleColor.Red);
+
+			} catch {
+				Util.WriteLine ("Cannot find community user for username: '" + username + "'", ConsoleColor.Red);
+			}
+
+			try {
+				u = User.GetUserByEmail(email);
+				Util.WriteLine ("User Id for '" + email + "' is: " + u.UserId, ConsoleColor.Red);
+			} catch {
+				Util.WriteLine ("Cannot find community user for email: '" + email + "'", ConsoleColor.Red);
+			}
+				
 		}
 	}
 

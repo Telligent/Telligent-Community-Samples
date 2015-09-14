@@ -39,6 +39,8 @@
     <Compile Include="Search.cs" />
     <Compile Include="Forums.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Blogs.cs" />
+    <Compile Include="Groups.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

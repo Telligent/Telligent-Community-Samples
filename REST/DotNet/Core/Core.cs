@@ -33,6 +33,19 @@ namespace Telligent
 			return webClient;
 		}
 
+		/// <summary>
+		/// Function that sets up a WebClient with the proper headers for delete
+		/// </summary>
+		/// <returns>The web client.</returns>
+		public static WebClient DeleteWebClient() {
+			WebClient webClient = GetWebClient ();
+
+			// Set the header
+			webClient.Headers.Add("Rest-Method", "DELETE");
+
+			return webClient;
+		}
+
 		public static void WriteSecurityToken(Config config) {
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine (config.ApiKey);
