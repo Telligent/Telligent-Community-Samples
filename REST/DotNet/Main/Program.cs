@@ -1,6 +1,7 @@
 ﻿using System;
 using Telligent;
 using Telligent.Community;
+using System.Collections;
 
 namespace Main
 {
@@ -15,7 +16,7 @@ namespace Main
 			//SearchExamples();
 
 			// Forum examples
-			//ForumExamples();
+			ForumExamples();
 
 			// User examples
 			UserExamples();
@@ -37,9 +38,15 @@ namespace Main
 		}
 
 		public static void ForumExamples() {
-			int forumId = 1;
+			int forumId = 554;
 
-//			Util.WriteLine("Count
+			Forum forum = Forum.GetForum (forumId);
+			Util.WriteLine ("Displaying threads for forum '" + forum.Name + "':", ConsoleColor.Cyan);
+			ArrayList threads = forum.GetForumThreads ();
+
+			foreach (Thread t in threads) {
+				Util.WriteLine (t.Subject, ConsoleColor.Red);
+			}
 	
 		}
 

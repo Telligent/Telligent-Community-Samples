@@ -37,10 +37,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.cs" />
-    <Compile Include="Forums.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Blogs.cs" />
     <Compile Include="Groups.cs" />
+    <Compile Include="Forums\Forums.cs" />
+    <Compile Include="Forums\Thread.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -48,5 +49,8 @@
       <Project>{15F86F3E-C93F-477C-9E56-CD6125DE8CF8}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forums\" />
   </ItemGroup>
 </Project>

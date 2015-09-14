@@ -7,8 +7,8 @@ namespace Telligent.Community
 	public class User
 	{
 		int userId = 0;
-		string username = "";
-		string email = "";
+		string username = string.Empty;
+		string email = string.Empty;
 		public enum UserStatus {Approved, Banned, Disapproved, NotSet};
 		UserStatus status = UserStatus.NotSet;
 
