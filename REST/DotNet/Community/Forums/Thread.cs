@@ -4,6 +4,17 @@ using System.Collections;
 
 namespace Telligent.Community
 {
+	/*
+	 * 
+	 * This class is not a complete representation of the thread object. 
+	 * More details here:
+	 * https://community.telligent.com/developers/w/developer85/46811.forum-thread-rest-endpoints
+	 * 
+	 */ 
+
+	/// <summary>
+	/// The thread class is used to represent a thread from a forum discussion. 
+	/// </summary>
 	public class Thread
 	{
 		int threadId = 0;
@@ -11,18 +22,34 @@ namespace Telligent.Community
 		string threadSubject = string.Empty;
 		string threadBody = string.Empty;
 
+		/// <summary>
+		/// Gets the Id of the Thread
+		/// </summary>
+		/// <value>The identifier.</value>
 		public int Id {
 			get { return threadId; }
 		}
 
+		/// <summary>
+		/// Gets the UserId of the Thread
+		/// </summary>
+		/// <value>The user identifier.</value>
 		public int UserId {
 			get { return threadUserId; }
 		}
 
+		/// <summary>
+		/// Gets the subject of the thread
+		/// </summary>
+		/// <value>The subject.</value>
 		public string Subject {
 			get { return threadSubject; }
 		}
 
+		/// <summary>
+		/// Gets the body of the thread
+		/// </summary>
+		/// <value>The body.</value>
 		public string Body {
 			get { return threadBody; }
 		}

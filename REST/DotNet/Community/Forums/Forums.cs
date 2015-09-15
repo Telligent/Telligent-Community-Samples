@@ -9,37 +9,64 @@ namespace Telligent.Community
 	{
 		ArrayList threads = new ArrayList();
 		int forumId = 0;
+		bool isValid = false;
 		string forumName = string.Empty;
 		string forumUrl = string.Empty;
 
+		/// <summary>
+		/// Gets the forum threads
+		/// </summary>
+		/// <value>The threads in a given forum</value>
 		public ArrayList Threads {
 			get { return threads; }
 		}
 
+		/// <summary>
+		/// Gets the forum Id
+		/// </summary>
+		/// <value>The forum id</value>
 		public int Id {
 			get { return forumId; }
 		}
 
 
+		/// <summary>
+		/// Gets the forum Name
+		/// </summary>
+		/// <value>The forum name</value>
 		public string Name {
 			get { return forumName; }
 		}
 
+		/// <summary>
+		/// Gets the forum URL
+		/// </summary>
+		/// <value>The forum URL</value>
 		public string Url {
 			get { return forumUrl; }
 		}
 
-
+		/// <summary>
+		/// Populates a forum instance based on the XML returned from an API call
+		/// </summary>
+		/// <returns>An instance of a forum</returns>
+		/// <param name="user">XML representation of Forum</param>
 		public static Forum ForumFromXml (XmlDocument forum) {
 			Forum f = new Forum ();
 
 			f.forumId = int.Parse (forum.SelectSingleNode ("/Response/Forum/Id").InnerText);
 			f.forumName = forum.SelectSingleNode ("/Response/Forum/Name").InnerText;
 			f.forumUrl = forum.SelectSingleNode ("/Response/Forum/Url").InnerText;
+			f.isValid = true;
 
 			return f;
 		}
 
+		/// <summary>
+		/// Looks up a forum by id
+		/// </summary>
+		/// <returns>A forum instance</returns>
+		/// <param name="forumId">The id of the forum to look up</param>
 		public static Forum GetForum (int forumId) {
 			Forum f;
 			string restEndPoint = "forums/{0}.xml";
@@ -68,10 +95,12 @@ namespace Telligent.Community
 		/// Returns an XmlNodeList containing threads in the requested forum
 		/// </summary>
 		/// <returns>Forum threads.</returns>
-		public ArrayList GetForumThreads ()
+		public ArrayList GetActiveForumThreads ()
 		{
-			// Check if we have a valid forum
-
+			// Check if we have a valid forum to lookup
+			if (!isValid)
+				return null;
+			
 			string restEndPoint = "forums/{0}/threads/active.xml";
 
 			// Build URL
