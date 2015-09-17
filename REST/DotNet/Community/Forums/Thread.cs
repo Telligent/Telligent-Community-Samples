@@ -6,7 +6,8 @@ namespace Telligent.Community
 {
 	/*
 	 * 
-	 * This class is not a complete representation of the thread object. 
+	 * This class is a light representation of the thread object.
+	 * 
 	 * More details here:
 	 * https://community.telligent.com/developers/w/developer85/46811.forum-thread-rest-endpoints
 	 * 
@@ -19,8 +20,10 @@ namespace Telligent.Community
 	{
 		int threadId = 0;
 		int threadUserId = 0;
+		int replyCount = 0;
 		string threadSubject = string.Empty;
 		string threadBody = string.Empty;
+		ArrayList postList;
 
 		/// <summary>
 		/// Gets the Id of the Thread
@@ -55,6 +58,36 @@ namespace Telligent.Community
 		}
 
 		/// <summary>
+		/// Does the thread have replies
+		/// </summary>
+		/// <value><c>true</c> if this thread has replies; otherwise, <c>false</c>.</value>
+		public bool HasReplies {
+			get { 
+				if (replyCount > 0)
+					return true;
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Returns the count of post replies of the thread
+		/// </summary>
+		/// <value>The reply count.</value>
+		public int ReplyCount {
+			get { return replyCount; }
+		}
+
+		/// <summary>
+		/// Gets the posts associated with this thread
+		/// </summary>
+		/// <returns>The posts.</returns>
+		public ArrayList GetPosts() {
+			postList = Post.GetPosts (threadId);
+
+			return postList;
+		}
+
+		/// <summary>
 		/// Returns and ArrayList of Threads for a forum
 		/// </summary>
 		/// <returns>Arraylist of Threads</returns>
@@ -85,6 +118,7 @@ namespace Telligent.Community
 			t.threadId = int.Parse(thread["Id"].InnerText);
 			t.threadSubject = thread["Subject"].InnerText;
 			t.threadBody = thread["Body"].InnerText;
+			t.replyCount = int.Parse(thread ["ReplyCount"].InnerText);
 			t.threadUserId = int.Parse (thread["Author"].SelectSingleNode("Id").InnerText);
 
 			return t;

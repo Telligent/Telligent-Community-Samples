@@ -42,6 +42,7 @@
     <Compile Include="Groups.cs" />
     <Compile Include="Forums\Forums.cs" />
     <Compile Include="Forums\Thread.cs" />
+    <Compile Include="Forums\Post.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
