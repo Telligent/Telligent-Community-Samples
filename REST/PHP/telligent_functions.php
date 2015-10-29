@@ -344,9 +344,9 @@ function CreateUser ($username, $password, $email) {
   // Setup the POST NAME/VALUE pairs
   $postdata = http_build_query(
     array(
-        'Username' => intval($username),
+        'Username' => $username,
         'Password' => $password,
-        'Email' => $email
+        'PrivateEmail' => $email
     )
   );
 
@@ -356,7 +356,7 @@ function CreateUser ($username, $password, $email) {
   // Read the returned XML
   $xml = simplexml_load_string($result) or die("Error: Cannot create object");
   
-  return $xml;
+  return $xml->User->Id;
 }
 
 /***************************************************************************
