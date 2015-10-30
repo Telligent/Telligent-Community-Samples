@@ -528,7 +528,7 @@ namespace Telligent.BigSocial.Polling.Plugins
             }
 
             var pollContextItem = TEApi.Url.CurrentContext.ContextItems.GetItemByContentType(PublicApi.Polls.ContentTypeId);
-            Poll poll = null;
+            Telligent.BigSocial.Polling.InternalApi.Poll poll = null;
             if (pollContextItem != null && pollContextItem.ContentId.HasValue)
                 poll = InternalApi.PollingService.GetPoll(pollContextItem.ContentId.Value);
 
