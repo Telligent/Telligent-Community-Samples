@@ -16,7 +16,7 @@ rich text editor to format the headings in your article to use the "Heading 2",
 
 ##Installation
 
-Copy the compiled plugin to the bin directory of your community website, and the Job Server.
+Copy the compiled plugin to the bin directory of your community website, and the Job Server and enable the Table of Contents plugin. In 9.0 and above, that can be done at Administration > Extensions.  In 8.5 and below go to Control Panel > System Administration > Manage Plugins)
 
 
 ##Building Source Code
