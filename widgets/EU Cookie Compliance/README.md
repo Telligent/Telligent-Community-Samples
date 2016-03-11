@@ -4,7 +4,7 @@
 Please see [The EU Internet Handbook](http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm) for more details on the requirements detailing EU legislation on the use of cookies.
 
 ###Version:
-This widget has been tested with version 9.0+ of Telligent Community
+This widget has been tested with version 7.6 and later versions of Telligent Community
 
 ###Installation:
 
