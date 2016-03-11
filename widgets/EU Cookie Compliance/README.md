@@ -21,7 +21,7 @@ This widget has been tested with version 9.0+ of Telligent Community
 ###Usage
 This widget set includes 1 widgets that allow you to add EU Cookie Compliance integration to your community. Place the widget in the footer of your site to have it display to all users:
 
-![EU Cookie Compliance](https://github.com/Telligent/Telligent-Community-Samples/tree/master/widgets/EU%20Cookie%20Compliance/Screen-1.png "EU Cookie Compliance")
+![EU Cookie Compliance](https://github.com/Telligent/Telligent-Community-Samples/blob/master/widgets/EU%20Cookie%20Compliance/Screen-1.png "EU Cookie Compliance")
 
 ###Questions, Feedback, etc.
 Please visit our [developer community](https://community.telligent.com/community/f/554) to ask questions, get answers, collaborate and connect with other developers. Plus, give us feedback there so we can continue to improve these tools for you.
